@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.integer('user_id').references('id').inTable('users');
     table.integer('routines_id').references('id').inTable('routines').onDelete('CASCADE').notNullable();
     table.string('name').notNullable();
+    table.string('description').notNullable();
     table.integer('exercise_type').defaultTo(0).notNullable();
     // 0-2: 0 = dynamic, 1 = static, 3 = cardio
     table.integer('sets');

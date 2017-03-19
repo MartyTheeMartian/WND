@@ -1,12 +1,13 @@
+
 'use strict';
 
 process.env.NODE_ENV = 'test';
 
 const assert = require('chai').assert;
 const { suite, test } = require('mocha');
-const knex = require('../knex');
+const knex = require('../../knex');
 
-suite('part1 migrations', () => {
+suite('users migrations', () => {
   before((done) => {
     knex.migrate.latest()
       .then(() => {
@@ -17,50 +18,50 @@ suite('part1 migrations', () => {
       });
   });
 
-  test('books columns', (done) => {
-    knex('books').columnInfo()
+  test('users columns', (done) => {
+    knex('users').columnInfo()
       .then((actual) => {
         const expected = {
           id: {
             type: 'integer',
             maxLength: null,
             nullable: false,
-            defaultValue: 'nextval(\'books_id_seq\'::regclass)'
+            defaultValue: 'nextval(\'users_id_seq\'::regclass)'
           },
 
-          title: {
+          first_name: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,
             defaultValue: '\'\'::character varying'
           },
 
-          author: {
+          last_name: {
             type: 'character varying',
             maxLength: 255,
             nullable: false,
             defaultValue: '\'\'::character varying'
           },
 
-          genre: {
-            type: 'character varying',
-            maxLength: 255,
-            nullable: false,
-            defaultValue: '\'\'::character varying'
-          },
-
-          description: {
-            type: 'text',
+          weight: {
+            type: 'integer',
             maxLength: null,
             nullable: false,
-            defaultValue: '\'\'::text'
+            defaultValue: '\'\'::character varying'
           },
 
-          cover_url: {
-            type: 'text',
-            maxLength: null,
+          email: {
+            type: 'character varying',
+            maxLength: 255,
             nullable: false,
-            defaultValue: '\'\'::text'
+            defaultValue: null
+          },
+
+          hashed_password: {
+            type: 'character',
+            maxLength: 60,
+            nullable: false,
+            defaultValue: null
           },
 
           created_at: {
