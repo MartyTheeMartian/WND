@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
-  title: We're Nerds Dude!!
+  title: We're Nerds Dude!! by The Powder Rangers
 # during dev, should point to your local machine
 host: localhost:10000
 # basePath prefixes all resource paths 
@@ -21,9 +21,9 @@ paths:
 
   /routines/:
     # binds a127 app logic to a route
-    x-swagger-router-controller: routines
+    x-swagger-router-controller: get_routines
     get:
-      description: Post request for user to log-in
+      description: GET request returns array of all predefined routines
       # used as the method name of the controller
       operationId: routines
       responses:
@@ -40,9 +40,9 @@ paths:
 
   /routines/{id}:
     # binds a127 app logic to a route
-    x-swagger-router-controller: routines
+    x-swagger-router-controller: get_routines_id
     get:
-      description: Post request for user to log-in
+      description: GET request returns specific predefined routine
       # used as the method name of the controller
       operationId: routinesId
       parameters:
@@ -50,6 +50,7 @@ paths:
           in: path
           required: true
           type: string
+          description: Enter routine id
           
       responses:
         "200":
@@ -65,9 +66,9 @@ paths:
             
   /routines/{id}/exercises:
     # binds a127 app logic to a route
-    x-swagger-router-controller: routines-exercises
+    x-swagger-router-controller: get_routines_id_exercises
     get:
-      description: Get request returns exercises for specific routine
+      description: GET request returns array of exercises for specific routine
       # used as the method name of the controller
       operationId: routinesIdExercises
       parameters:
@@ -75,6 +76,7 @@ paths:
           in: path
           required: true
           type: string
+          description: Enter routine id
           
       responses:
         "200":
@@ -90,9 +92,9 @@ paths:
             
   /exercises:
     # binds a127 app logic to a route
-    x-swagger-router-controller: exercises
+    x-swagger-router-controller: get_exercises
     get:
-      description: Post request for user to log-in
+      description: GET request returns array of all predefined exercises
       # used as the method name of the controller
       operationId: exercises
       responses:
@@ -109,9 +111,9 @@ paths:
   
   /exercises/{id}:
     # binds a127 app logic to a route
-    x-swagger-router-controller: exercises
+    x-swagger-router-controller: get_exercises_id
     get:
-      description: Post request for user to log-in
+      description: GET request returns specific exercise
       # used as the method name of the controller
       operationId: exercisesId
       parameters:
@@ -136,7 +138,7 @@ paths:
     x-swagger-router-controller: users
 
     post:
-      description: Returns predefined routines to the user
+      description: POST request for user sign-up
       # used as the method name of the controller
       operationId: users
       parameters:
@@ -156,7 +158,7 @@ paths:
           description: Input user weight
           in: query
           required: true
-          type: integer
+          type: number
           
         - name: email
           description: Input email
@@ -186,7 +188,7 @@ paths:
     # binds a127 app logic to a route
     x-swagger-router-controller: users
     post:
-      description: Post request for user to log-in
+      description: POST request for user to log-in
       # used as the method name of the controller
       operationId: usersId
       parameters:
@@ -211,14 +213,38 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+            
 
   /users/{user_id}/routines:
     # binds a127 app logic to a route
     x-swagger-router-controller: users_id_routines
-    post:
-      description: Post request for user to create routine
+    
+    get:
+      description: GET request for user's custom routine
       # used as the method name of the controller
-      operationId: user_id_routines
+      operationId: get_user_id_routines
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+    post:
+      description: POST request for user to create custom routine
+      # used as the method name of the controller
+      operationId: post_user_id_routine
       parameters:
         - name: user_id
           in: path
@@ -241,9 +267,478 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
+    patch:
+      description: PATCH request for user to update custom routine
+      # used as the method name of the controller
+      operationId: patch_user_id_routine
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: name
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
+    delete:
+      description: DELETE request for user's custom routine
+      # used as the method name of the controller
+      operationId: delete_user_id_routine
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: name
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
+  /users/{user_id}/favorites:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_id_favorites
+    
+    get:
+      description: GET request for user's custom routine
+      # used as the method name of the controller
+      operationId: get_user_id_favorites
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: name
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+    post:
+      description: POST request for user to create custom routine
+      # used as the method name of the controller
+      operationId: post_user_id_favorites
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: name
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
+  /users/{user_id}/favorites/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_id_favorites_id
+    
+    get:
+      description: GET request for user's custom routine
+      # used as the method name of the controller
+      operationId: get_user_id_favorites_id
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - name: name
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+    delete:
+      description: DELETE request for user to remove routine from favorites
+      # used as the method name of the controller
+      operationId: delete_user_id_favorites_id
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - name: name
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /users/{user_id}/log:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_id_log
+    
+    get:
+      description: GET request for array of all log entries
+      # used as the method name of the controller
+      operationId: get_users_id_log
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: name
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+    post:
+      description: POST request for user to add routine to log
+      # used as the method name of the controller
+      operationId: post_users_id_log
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: routines_id
+          in: query
+          required: true
+          type: integer
+        - name: date_time
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /users/{user_id}/log/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_id_log_id
+    
+    get:
+      description: GET request for user's custom routine
+      # used as the method name of the controller
+      operationId: get_users_id_log_id
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - name: name
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  
+    patch:
+      description: PATCH request for user to update log entry
+      # used as the method name of the controller
+      operationId: patch_user_id_log_id
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - name: name
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  
+    delete:
+      description: DELETE request for user to remove routine from favorites
+      # used as the method name of the controller
+      operationId: delete_user_id_log_id
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - name: name
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /users/{user_id}/weight:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_id_weight
+    
+    get:
+      description: GET request for array of all weight log entries
+      # used as the method name of the controller
+      operationId: get_user_id_weight
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+    post:
+      description: POST request for user to weight log entry
+      # used as the method name of the controller
+      operationId: post_user_id_weight
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: weight
+          in: query
+          required: true
+          type: number
+        - name: date_time
+          in: query
+          required: true
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /users/{user_id}/weight/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_id_weight_id
+    
+    get:
+      description: GET request for user's specific weight log entry
+      # used as the method name of the controller
+      operationId: get_user_id_weight_id
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: id
+          in: path
+          required: true
+          type: integer
+
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  
+    patch:
+      description: PATCH request for user to update weight log entry
+      # used as the method name of the controller
+      operationId: patch_user_id_weight_id
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: id
+          in: path
+          required: true
+          type: integer
+        - name: weight
+          in: query
+          required: false
+          type: string
+        - name: date_time
+          in: query
+          required: false
+          type: string
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  
+    delete:
+      description: DELETE request for user to remove entry from weight log
+      # used as the method name of the controller
+      operationId: delete_user_id_weight_id
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          type: integer
+        - name: id
+          in: path
+          required: true
+          type: integer
+        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/RoutinesResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
 
 

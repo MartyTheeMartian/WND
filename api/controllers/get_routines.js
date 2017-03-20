@@ -41,7 +41,7 @@ function routines(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
 
   if (req.swagger.params.integer.value) {
-    knex('verses')
+    knex('routines')
       .where('id', req.swagger.params.integer.value)
       .select('*')
       .first()
