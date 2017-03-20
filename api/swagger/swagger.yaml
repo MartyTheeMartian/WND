@@ -382,7 +382,7 @@ paths:
 
   /users/{users_id}/favorites/{id}:
     # binds a127 app logic to a route
-    x-swagger-router-controller: users_id_favorites_id
+    x-swagger-router-controller: 
     
     get:
       description: GET request for user's custom routine
