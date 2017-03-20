@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('first_name').defaultTo('').notNullable();
     table.string('last_name').defaultTo('').notNullable();
-    table.numeric('weight').notNullable();
+    table.integer('weight').defaultTo(0).notNullable();
     table.string('email').notNullable().unique();
     table.integer('status_code').defaultTo(0).notNullable();
     // 0-1: 0 = normal user, 1 = admin user

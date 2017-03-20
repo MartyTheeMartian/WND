@@ -21,11 +21,11 @@ paths:
 
   /routines/:
     # binds a127 app logic to a route
-    x-swagger-router-controller: get_routines
+    x-swagger-router-controller: routines
     get:
       description: GET request returns array of all predefined routines
       # used as the method name of the controller
-      operationId: routines
+      operationId: getRoutines
       responses:
         "200":
           description: Success
@@ -40,11 +40,11 @@ paths:
 
   /routines/{id}:
     # binds a127 app logic to a route
-    x-swagger-router-controller: get_routines_id
+    x-swagger-router-controller: routines_id
     get:
       description: GET request returns specific predefined routine
       # used as the method name of the controller
-      operationId: routinesId
+      operationId: getRoutinesId
       parameters:
         - name: id
           in: path
@@ -66,11 +66,11 @@ paths:
             
   /routines/{id}/exercises:
     # binds a127 app logic to a route
-    x-swagger-router-controller: get_routines_id_exercises
+    x-swagger-router-controller: routines_id_exercises
     get:
       description: GET request returns array of exercises for specific routine
       # used as the method name of the controller
-      operationId: routinesIdExercises
+      operationId: getRoutinesIdExercises
       parameters:
         - name: id
           in: path
@@ -92,11 +92,11 @@ paths:
             
   /exercises:
     # binds a127 app logic to a route
-    x-swagger-router-controller: get_exercises
+    x-swagger-router-controller: exercises
     get:
       description: GET request returns array of all predefined exercises
       # used as the method name of the controller
-      operationId: exercises
+      operationId: getExercises
       responses:
         "200":
           description: Success
@@ -111,11 +111,11 @@ paths:
   
   /exercises/{id}:
     # binds a127 app logic to a route
-    x-swagger-router-controller: get_exercises_id
+    x-swagger-router-controller: exercises_id
     get:
       description: GET request returns specific exercise
       # used as the method name of the controller
-      operationId: exercisesId
+      operationId: getExercisesId
       parameters:
         - name: id
           in: path
@@ -142,7 +142,7 @@ paths:
     post:
       description: POST request for user sign-up
       # used as the method name of the controller
-      operationId: users
+      operationId: usersSignup
       parameters:
         - name: first_name
           in: query
@@ -192,7 +192,7 @@ paths:
     post:
       description: POST request for user to log-in
       # used as the method name of the controller
-      operationId: usersId
+      operationId: usersLogin
       parameters:
         - name: email
           in: query
@@ -226,7 +226,7 @@ paths:
     get:
       description: GET request for user's custom routine
       # used as the method name of the controller
-      operationId: get_user_id_routines
+      operationId: getUsersIdRoutines
       parameters:
         - name: users_id
           in: path
@@ -249,7 +249,7 @@ paths:
     post:
       description: POST request for user to create custom routine
       # used as the method name of the controller
-      operationId: post_users_id_routine
+      operationId: postUsersIdRoutines
       parameters:
         - name: users_id
           in: path
@@ -275,7 +275,7 @@ paths:
     patch:
       description: PATCH request for user to update custom routine
       # used as the method name of the controller
-      operationId: patch_users_id_routine
+      operationId: patchUsersIdRoutine
       parameters:
         - name: users_id
           in: path
@@ -301,7 +301,7 @@ paths:
     delete:
       description: DELETE request for user's custom routine
       # used as the method name of the controller
-      operationId: delete_users_id_routine
+      operationId: deleteUsersIdRoutine
       parameters:
         - name: users_id
           in: path
@@ -331,7 +331,7 @@ paths:
     get:
       description: GET request for user's custom routine
       # used as the method name of the controller
-      operationId: get_users_id_favorites
+      operationId: getUsersIdFavorites
       parameters:
         - name: users_id
           in: path
@@ -357,7 +357,7 @@ paths:
     post:
       description: POST request for user to create custom routine
       # used as the method name of the controller
-      operationId: post_users_id_favorites
+      operationId: postUsersIdFavorites
       parameters:
         - name: users_id
           in: path
@@ -387,7 +387,7 @@ paths:
     get:
       description: GET request for user's custom routine
       # used as the method name of the controller
-      operationId: get_users_id_favorites_id
+      operationId: getUsersIdFavoritesId
       parameters:
         - name: users_id
           in: path
@@ -417,7 +417,7 @@ paths:
     delete:
       description: DELETE request for user to remove routine from favorites
       # used as the method name of the controller
-      operationId: delete_users_id_favorites_id
+      operationId: deleteUsersIdFavoritesId
       parameters:
         - name: users_id
           in: path
@@ -451,7 +451,7 @@ paths:
     get:
       description: GET request for array of all log entries
       # used as the method name of the controller
-      operationId: get_users_id_log
+      operationId: getUsersIdLog
       parameters:
         - name: users_id
           in: path
@@ -477,7 +477,7 @@ paths:
     post:
       description: POST request for user to add routine to log
       # used as the method name of the controller
-      operationId: post_users_id_log
+      operationId: postUsersIdLog
       parameters:
         - name: users_id
           in: path
@@ -511,7 +511,7 @@ paths:
     get:
       description: GET request for user's custom routine
       # used as the method name of the controller
-      operationId: get_users_id_log_id
+      operationId: getUsersIdLogId
       parameters:
         - name: users_id
           in: path
@@ -541,7 +541,7 @@ paths:
     patch:
       description: PATCH request for user to update log entry
       # used as the method name of the controller
-      operationId: patch_users_id_log_id
+      operationId: patchUsersIdLogId
       parameters:
         - name: users_id
           in: path
@@ -571,7 +571,7 @@ paths:
     delete:
       description: DELETE request for user to remove routine from favorites
       # used as the method name of the controller
-      operationId: delete_users_id_log_id
+      operationId: deleteUsersIdLogId
       parameters:
         - name: users_id
           in: path
@@ -605,7 +605,7 @@ paths:
     get:
       description: GET request for array of all weight log entries
       # used as the method name of the controller
-      operationId: get_users_id_weight
+      operationId: getUsersIdWeight
       parameters:
         - name: users_id
           in: path
@@ -627,7 +627,7 @@ paths:
     post:
       description: POST request for user to weight log entry
       # used as the method name of the controller
-      operationId: post_users_id_weight
+      operationId: postUsersIdWeight
       parameters:
         - name: users_id
           in: path
@@ -661,7 +661,7 @@ paths:
     get:
       description: GET request for user's specific weight log entry
       # used as the method name of the controller
-      operationId: get_users_id_weight_id
+      operationId: getUsersIdWeightId
       parameters:
         - name: users_id
           in: path
@@ -688,7 +688,7 @@ paths:
     patch:
       description: PATCH request for user to update weight log entry
       # used as the method name of the controller
-      operationId: patch_users_id_weight_id
+      operationId: patchUsersIdWeightId
       parameters:
         - name: users_id
           in: path
@@ -722,7 +722,7 @@ paths:
     delete:
       description: DELETE request for user to remove entry from weight log
       # used as the method name of the controller
-      operationId: delete_users_id_weight_id
+      operationId: deleteUsersIdWeightId
       parameters:
         - name: users_id
           in: path
