@@ -6,10 +6,11 @@ exports.seed = function(knex, Promise) {
       return Promise.all([
         knex('users').insert({
           id: 1,
-          first_name: 'Joanne',
-          last_name: 'Rowling',
-          email: 'jkrowling@gmail.com',
-          hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
+          users_id: 1,
+          routines_id: 1,
+          rating: 4,
+          date: '2016-06-29',
+          time: '14:26:16 UTC',
           created_at: new Date('2016-06-29 14:26:16 UTC'),
           updated_at: new Date('2016-06-29 14:26:16 UTC')
         })

@@ -121,6 +121,8 @@ paths:
           in: path
           required: true
           type: integer
+          description: Input exercise id
+          
       responses:
         "200":
           description: Success
@@ -135,7 +137,7 @@ paths:
     
   /users/signup:
     # binds a127 app logic to a route
-    x-swagger-router-controller: users
+    x-swagger-router-controller: users_signup
 
     post:
       description: POST request for user sign-up
@@ -143,34 +145,34 @@ paths:
       operationId: users
       parameters:
         - name: first_name
-          description: Input first name
           in: query
           required: true
           type: string
+          description: Input first name
           
         - name: last_name
-          description: Input last name
           in: query
           required: true
           type: string
+          description: Input last name
         
         - name: weight
-          description: Input user weight
           in: query
           required: true
           type: number
+          description: Input user weight (lb)
           
         - name: email
-          description: Input email
           in: query
           required: true
           type: string
+          description: Input email
           
         - name: password
-          description: Input password
           in: query
           required: true
           type: string
+          description: Input password
           
       responses:
         "200":
@@ -186,7 +188,7 @@ paths:
             
   /users/:
     # binds a127 app logic to a route
-    x-swagger-router-controller: users
+    x-swagger-router-controller: users_login
     post:
       description: POST request for user to log-in
       # used as the method name of the controller
@@ -196,11 +198,13 @@ paths:
           in: query
           required: true
           type: string
+          description: Input email
           
         - name: password
           in: query
           required: true
           type: string
+          description: Input password
           
       responses:
         "200":
@@ -215,7 +219,7 @@ paths:
             $ref: "#/definitions/ErrorResponse"
             
 
-  /users/{user_id}/routines:
+  /users/{users_id}/routines:
     # binds a127 app logic to a route
     x-swagger-router-controller: users_id_routines
     
@@ -224,10 +228,11 @@ paths:
       # used as the method name of the controller
       operationId: get_user_id_routines
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
+          description: Input users id
         
       responses:
         "200":
@@ -244,9 +249,9 @@ paths:
     post:
       description: POST request for user to create custom routine
       # used as the method name of the controller
-      operationId: post_user_id_routine
+      operationId: post_users_id_routine
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -270,9 +275,9 @@ paths:
     patch:
       description: PATCH request for user to update custom routine
       # used as the method name of the controller
-      operationId: patch_user_id_routine
+      operationId: patch_users_id_routine
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -296,9 +301,9 @@ paths:
     delete:
       description: DELETE request for user's custom routine
       # used as the method name of the controller
-      operationId: delete_user_id_routine
+      operationId: delete_users_id_routine
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -319,16 +324,16 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-  /users/{user_id}/favorites:
+  /users/{users_id}/favorites:
     # binds a127 app logic to a route
     x-swagger-router-controller: users_id_favorites
     
     get:
       description: GET request for user's custom routine
       # used as the method name of the controller
-      operationId: get_user_id_favorites
+      operationId: get_users_id_favorites
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -352,9 +357,9 @@ paths:
     post:
       description: POST request for user to create custom routine
       # used as the method name of the controller
-      operationId: post_user_id_favorites
+      operationId: post_users_id_favorites
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -375,16 +380,16 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-  /users/{user_id}/favorites/{id}:
+  /users/{users_id}/favorites/{id}:
     # binds a127 app logic to a route
     x-swagger-router-controller: users_id_favorites_id
     
     get:
       description: GET request for user's custom routine
       # used as the method name of the controller
-      operationId: get_user_id_favorites_id
+      operationId: get_users_id_favorites_id
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -412,9 +417,9 @@ paths:
     delete:
       description: DELETE request for user to remove routine from favorites
       # used as the method name of the controller
-      operationId: delete_user_id_favorites_id
+      operationId: delete_users_id_favorites_id
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -439,7 +444,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-  /users/{user_id}/log:
+  /users/{users_id}/log:
     # binds a127 app logic to a route
     x-swagger-router-controller: users_id_log
     
@@ -448,7 +453,7 @@ paths:
       # used as the method name of the controller
       operationId: get_users_id_log
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -474,7 +479,7 @@ paths:
       # used as the method name of the controller
       operationId: post_users_id_log
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -499,7 +504,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-  /users/{user_id}/log/{id}:
+  /users/{users_id}/log/{id}:
     # binds a127 app logic to a route
     x-swagger-router-controller: users_id_log_id
     
@@ -508,7 +513,7 @@ paths:
       # used as the method name of the controller
       operationId: get_users_id_log_id
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -536,9 +541,9 @@ paths:
     patch:
       description: PATCH request for user to update log entry
       # used as the method name of the controller
-      operationId: patch_user_id_log_id
+      operationId: patch_users_id_log_id
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -566,9 +571,9 @@ paths:
     delete:
       description: DELETE request for user to remove routine from favorites
       # used as the method name of the controller
-      operationId: delete_user_id_log_id
+      operationId: delete_users_id_log_id
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -593,16 +598,16 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-  /users/{user_id}/weight:
+  /users/{users_id}/weight:
     # binds a127 app logic to a route
     x-swagger-router-controller: users_id_weight
     
     get:
       description: GET request for array of all weight log entries
       # used as the method name of the controller
-      operationId: get_user_id_weight
+      operationId: get_users_id_weight
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -622,9 +627,9 @@ paths:
     post:
       description: POST request for user to weight log entry
       # used as the method name of the controller
-      operationId: post_user_id_weight
+      operationId: post_users_id_weight
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -649,16 +654,16 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-  /users/{user_id}/weight/{id}:
+  /users/{users_id}/weight/{id}:
     # binds a127 app logic to a route
     x-swagger-router-controller: users_id_weight_id
     
     get:
       description: GET request for user's specific weight log entry
       # used as the method name of the controller
-      operationId: get_user_id_weight_id
+      operationId: get_users_id_weight_id
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -683,9 +688,9 @@ paths:
     patch:
       description: PATCH request for user to update weight log entry
       # used as the method name of the controller
-      operationId: patch_user_id_weight_id
+      operationId: patch_users_id_weight_id
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer
@@ -717,9 +722,9 @@ paths:
     delete:
       description: DELETE request for user to remove entry from weight log
       # used as the method name of the controller
-      operationId: delete_user_id_weight_id
+      operationId: delete_users_id_weight_id
       parameters:
-        - name: user_id
+        - name: users_id
           in: path
           required: true
           type: integer

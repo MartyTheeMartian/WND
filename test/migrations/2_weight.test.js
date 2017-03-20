@@ -4,10 +4,11 @@
 process.env.NODE_ENV = 'test';
 
 const assert = require('chai').assert;
-const { suite, test } = require('mocha');
+const suite = require('mocha').Suite;
+const test = require('mocha').Test;
 const knex = require('../../knex');
 
-suite('users migrations', () => {
+new suite('users migrations', () => {
   before((done) => {
     knex.migrate.latest()
       .then(() => {
@@ -42,7 +43,7 @@ suite('users migrations', () => {
             nullable: false,
             defaultValue: null
           },
-          
+
           created_at: {
             type: 'timestamp with time zone',
             maxLength: null,

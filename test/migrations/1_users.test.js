@@ -3,11 +3,16 @@
 
 process.env.NODE_ENV = 'test';
 
-const assert = require('chai').assert;
-const { suite, test } = require('mocha');
-const knex = require('../../knex');
 
-suite('users migrations', () => {
+const assert = require('chai').assert;
+const suite = require('mocha').Suite;
+const test = require('mocha').Test;
+const knex = require('../../knex');
+// const path = require("path")
+// const knex = require( path.resolve(__dirname) + '/../../knex.js');
+
+new suite('users migrations', () => {
+  console.log("inside?");
   before((done) => {
     knex.migrate.latest()
       .then(() => {
@@ -78,7 +83,7 @@ suite('users migrations', () => {
             defaultValue: 'now()'
           }
         };
-
+        console.log(expected, "expected");
         for (const column in expected) {
           assert.deepEqual(
             actual[column],
