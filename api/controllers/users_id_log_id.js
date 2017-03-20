@@ -5,8 +5,9 @@ const knex = require('../../knex');
 
 
 module.exports = {
-  getUsersIdLog: getUsersIdLog,
-  postUsersIdLog: postUsersIdLog
+  getUsersIdLogId: getUsersIdLogId,
+  patchUsersIdLogId: patchUsersIdLogId,
+  deleteUsersIdLogId: deleteUsersIdLogId
 };
 
 function getUsersIdLog(req, res) {
@@ -16,6 +17,12 @@ function getUsersIdLog(req, res) {
 }
 
 function postUsersIdLog(req, res) {
+
+
+
+}
+
+function deleteUsersIdLogId(req, res) {
 
 
 

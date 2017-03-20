@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
 
   return knex.schema.createTable('exercises', (table) => {
     table.increments();
-    table.integer('user_id').references('id').inTable('users');
+    table.integer('users_id').references('id').inTable('users');
     table.integer('routines_id').references('id').inTable('routines').onDelete('CASCADE').notNullable();
     table.string('name').notNullable();
     table.string('description').notNullable();
