@@ -4,7 +4,7 @@
 //
 // const assert = require('chai').assert;
 // const { suite, test } = require('mocha');
-// const knex = require('../knex');
+// const knex = require('../../knex');
 //
 // suite('part1 migrations', () => {
 //   before((done) => {
