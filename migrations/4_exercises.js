@@ -9,9 +9,9 @@ exports.up = function(knex, Promise) {
     table.string('description').notNullable();
     table.integer('exercise_type').defaultTo(0).notNullable();
     // 0-2: 0 = dynamic, 1 = static, 3 = cardio
-    table.integer('sets').defaultTo(0);
-    table.integer('repetitions').defaultTo(0);
-    table.integer('time_duration').defaultTo(0);
+    table.integer('sets');
+    table.integer('repetitions');
+    table.integer('time_duration');
     table.timestamp("created_at").defaultTo(knex.raw('now()')).notNullable();
     table.timestamp("updated_at").defaultTo(knex.raw('now()')).notNullable();
   });
