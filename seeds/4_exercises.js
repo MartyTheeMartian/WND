@@ -30,9 +30,10 @@ Promise
   val.forEach(x => filtered.push({
     name: x.name,
     description: x.description,
-    status: x.status,
+    exercise_type: x.status,
     sets: 0,
     reps: 0,
+    time_duration: 0,
     created_at: new Date('2016-06-29 14:26:16 UTC'),
     updated_at: new Date('2016-06-29 14:26:16 UTC')
     }));
@@ -40,13 +41,13 @@ Promise
 
 exports.seed = function(knex, Promise) {
 
-  return knex('users').del()
+  return knex('exercises').del()
     .then(function () {
       return Promise.all([
-        knex('users').insert(filtered)
+        knex('exercises').insert(filtered)
       ])
       .then(() => {
-        return knex.raw("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users))");
+        return knex.raw("SELECT setval('exercises_id_seq', (SELECT MAX(id) FROM exercises))");
       });
     });
 };
