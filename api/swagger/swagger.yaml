@@ -828,8 +828,8 @@ definitions:
         type: string
         
   ErrorResponse:
-    # required:
-    #   - message
+    required:
+      - message
     properties:
       message:
         type: string
