@@ -1,12 +1,12 @@
 
 exports.seed = function(knex, Promise) {
 
-  return knex('weight').del()
+  return knex('users').del()
     .then(function () {
       return Promise.all([
-        knex('weight').insert({
+        knex('users').insert({
           id: 1,
-          users_id: 1,
+          user_id: 1,
           weight: '175',
           date: '2016-06-29',
           created_at: new Date('2016-06-29 14:26:16 UTC'),
@@ -14,7 +14,7 @@ exports.seed = function(knex, Promise) {
         })
       ])
       .then(() => {
-        return knex.raw("SELECT setval('weight_id_seq', (SELECT MAX(id) FROM weight))");
+        return knex.raw("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users))");
       });
     });
 };
