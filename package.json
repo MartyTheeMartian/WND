@@ -8,8 +8,11 @@
   "license": "",
   "main": "app.js",
   "dependencies": {
+    "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.12.3",
+    "jsonwebtoken": "^7.3.0",
     "knex": "^0.12.8",
     "nodemon": "^1.11.0",
     "pg": "^6.1.4",
@@ -20,7 +23,6 @@
     "chai": "^3.5.0",
     "dotenv": "^4.0.0",
     "eslint": "^3.18.0",
-    "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "should": "^7.1.0",
     "supertest": "^1.0.0"

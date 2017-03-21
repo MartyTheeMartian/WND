@@ -55,11 +55,12 @@ function deleteUsersIdLogId(req, res) {
     .select('*')
     .first()
     .then((result) => {
-      .where('users_id', req.swagger.params.users_id.value)
-      .andWhere('id', req.swagger.params.id.value)
-      .select('*')
-      .first()
-      .del();
+      knex('log')
+        .where('users_id', req.swagger.params.users_id.value)
+        .andWhere('id', req.swagger.params.id.value)
+        .select('*')
+        .first()
+        .del();
       res.send(result)
     })
     .catch((err) => {
