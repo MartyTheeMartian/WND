@@ -159,7 +159,7 @@ paths:
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/RoutinesResponse"
+            $ref: "#/definitions/UsersResponse"
         # responses may fall through to errors
         default:
           description: Error
@@ -184,10 +184,8 @@ paths:
       responses:
         "200":
           description: Success
-          # schema:
-          #   # a pointer to a definition
-          #   $ref: "#/definitions/RoutinesResponse"
-        # responses may fall through to errors
+          schema:
+            $ref: "#/definitions/UsersResponse"
         default:
           description: Error
           schema:
@@ -1011,8 +1009,28 @@ definitions:
             items: 
               type: integer
           
-          
+
+  UsersResponse:
+    required:
+      - id
+      - first_name
+      - last_name
+      - weight
+      - email
+    properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        last_name:
+          type: string
+        weight:
+          type: integer
+        email:
+          type: string
+  
   ExercisesResponse:
+    type: object
     required:
       - id
       - name
@@ -1020,8 +1038,6 @@ definitions:
       - status
     properties:
       id: 
-        type: integer
-      users_id:
         type: integer
       name:
         type: string
@@ -1101,9 +1117,9 @@ definitions:
   
   ErrorResponse:
     required:
-      - message
+      - ErrorMessage
     properties:
-      message:
+      ErrorMessage:
         type: string
         
 

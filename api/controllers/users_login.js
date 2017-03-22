@@ -26,7 +26,7 @@ function usersLogin(req, res) {
     .first()
     .then((userResult) => {
       user = userResult;
-      return bcrypt.compare(req.body.password, user.password);
+      return bcrypt.compare(req.body.password, user.hashed_password);
     })
     .then((match) => {
       if(match) {
@@ -39,6 +39,7 @@ function usersLogin(req, res) {
           expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
           secure: router.get('env') === 'test'
         });
+        delete user.status;
         delete user.hashed_password;
         res.send(user);
       }
