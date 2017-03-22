@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
     table.integer('routines_id').references('id').inTable('routines').onDelete('CASCADE').notNullable();
     // table.string('routines_name').references('name').inTable('routines').onDelete('CASCADE').notNullable();
     table.integer('rating').defaultTo(0).notNullable(); // 0-5
-    table.dateTime('date_time').notNullable();
+    table.date('date').notNullable();
     table.timestamp("created_at").defaultTo(knex.raw('now()')).notNullable();
     table.timestamp("updated_at").defaultTo(knex.raw('now()')).notNullable();
   });
