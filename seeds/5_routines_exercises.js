@@ -7,6 +7,9 @@ exports.seed = function(knex, Promise) {
         knex('routines_exercises').insert({
           routines_id: 1,
           exercises_id: 1,
+          sets: 3,
+          reps: 20,
+          duration: null,
           created_at: new Date('2016-06-29 14:26:16 UTC'),
           updated_at: new Date('2016-06-29 14:26:16 UTC')
         })

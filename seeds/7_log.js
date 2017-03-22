@@ -9,7 +9,9 @@ exports.seed = function(knex, Promise) {
           users_id: 1,
           routines_id: 1,
           rating: 4,
+          notes: 'Workout was intense. I made sweat.',
           date: '2016-06-29',
+          time: '14:26:16 UTC',
           created_at: new Date('2016-06-29 14:26:16 UTC'),
           updated_at: new Date('2016-06-29 14:26:16 UTC')
         })

@@ -8,7 +8,8 @@ exports.up = function(knex, Promise) {
     table.string('name').notNullable();
     table.string('description').notNullable();
     table.integer('exercise_type').defaultTo(0).notNullable();
-    // 0-2: 0 = dynamic, 1 = static, 3 = cardio
+    table.integer('status').defaultTo(0).notNullable();
+    // 0-2: 0 = dynamic, 1 = static, 2 = cardio
     table.timestamp("created_at").defaultTo(knex.raw('now()')).notNullable();
     table.timestamp("updated_at").defaultTo(knex.raw('now()')).notNullable();
   });

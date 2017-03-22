@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
     table.integer('rating').defaultTo(0).notNullable(); // 0-5
     table.text('notes').defaultTo('');
     table.date('date').notNullable();
+    table.time('time').notNullable();
     table.timestamp("created_at").defaultTo(knex.raw('now()')).notNullable();
     table.timestamp("updated_at").defaultTo(knex.raw('now()')).notNullable();
   });

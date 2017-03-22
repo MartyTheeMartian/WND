@@ -17,7 +17,13 @@ function getExercisesId(req, res) {
     .select('*')
     .first()
     .then((result) => {
-      res.send(result);
+      if(result) {
+        res.send(result);
+      }
+      else {
+        res.status(404);
+        res.send({status: 404, ErrorMessage: 'Not Found'});
+      }
     })
     .catch((err) => {
       res.setStatus(404);

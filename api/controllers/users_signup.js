@@ -35,7 +35,7 @@ function usersSignup(req, res) {
               last_name: req.body.last_name,
               weight: req.body.weight,
               email: req.body.email,
-              password: hashed_password
+              hashed_password: hashed_password
             }, '*')
             .first()
         })
@@ -50,7 +50,7 @@ function usersSignup(req, res) {
             expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
             secure: router.get('env') === 'test'
           });
-
+          delete user.status;
           delete user.hashed_password;
           res.send(user);
         })
