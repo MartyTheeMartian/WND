@@ -5,6 +5,9 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.integer('routines_id').references('id').inTable('routines').onDelete('CASCADE').notNullable();
     table.integer('exercises_id').references('id').inTable('exercises').onDelete('CASCADE').notNullable();
+    table.integer('sets').defaultTo(null);
+    table.integer('repetitions').defaultTo(null);
+    table.integer('time_duration').defaultTo(null);
     table.timestamp("created_at").defaultTo(knex.raw('now()')).notNullable();
     table.timestamp("updated_at").defaultTo(knex.raw('now()')).notNullable();
   });

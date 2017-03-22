@@ -5,15 +5,16 @@ const knex = require('../../knex');
 
 
 module.exports = {
-  exercisesId: exercisesId
+  getExercisesId: getExercisesId
 };
 
 
-function exercisesId(req, res) {
+function getExercisesId(req, res) {
 
   knex('exercises')
     .where('id', req.swagger.params.id.value)
     .select('*')
+    .first()
     .then((result) => {
       res.send(result);
     })

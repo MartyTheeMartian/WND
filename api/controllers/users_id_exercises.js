@@ -2,16 +2,17 @@
 
 var util = require('util');
 const knex = require('../../knex');
+const bodyParser = require('body-parser');
 
 
 module.exports = {
-  getUsersIdWeight: getUsersIdWeight,
-  postUsersIdWeight: postUsersIdWeight
+  getUsersIdExercises: getUsersIdExercises,
+  postUsersIdExercises: postUsersIdExercises
 };
 
-function getUsersIdWeight(req, res) {
+function getUsersIdExercises(req, res) {
 
-  knex('weight')
+  knex('exercises')
     .where('users_id', req.swagger.params.users_id.value)
     .select('*')
     .then((result) => {
@@ -22,14 +23,15 @@ function getUsersIdWeight(req, res) {
     });
 }
 
-function postUsersIdWeight(req, res) {
+function postUsersIdExercises(req, res) {
 
-  knex('weight')
+  knex('exercises')
     .insert({
       users_id: req.swagger.params.users_id.value,
-      weight: req.swagger.params.weight.value,
-      date: req.swagger.params.date.value
-    },'*')
+      name: req.body.name,
+      description: req.body.description,
+      status: req.body.status
+    }, '*')
     .first()
     .then((result) => {
       res.send(result);
@@ -37,4 +39,5 @@ function postUsersIdWeight(req, res) {
     .catch((err) => {
       next();
     });
+
 }

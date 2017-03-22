@@ -16,7 +16,8 @@ function getRoutines(req, res) {
       res.send(result);
     })
     .catch((err) => {
-      next();
+      err.message = 'Not Found.'
+      res.send(err);
     });
 
 }
