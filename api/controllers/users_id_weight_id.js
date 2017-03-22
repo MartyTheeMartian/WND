@@ -18,11 +18,16 @@ function getUsersIdWeightId(req, res) {
     .select('*')
     .first()
     .then((result) => {
-      res.send(result);
+      if(result) {
+        res.send(result);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      res.setStatus(404);
-      res.send('Not Found');
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found'});
     });
 
 }

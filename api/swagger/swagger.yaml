@@ -986,17 +986,10 @@ definitions:
   CustomRoutine:
     allOf:
       - required: 
-        - users_id
         - name
         - description
         - exercises
         properties:
-          id:
-            description: Input routine id
-            type: integer
-          users_id:
-            description: Input users Id
-            type: integer
           name:
             description: Input name of routine
             type: string
@@ -1004,7 +997,7 @@ definitions:
             description: Input description of routine
             type: string
           exercises:
-            description: Input password
+            description: Input exercise Ids
             type: array 
             items: 
               type: integer
@@ -1053,8 +1046,6 @@ definitions:
       - description
     properties:
       id: 
-        type: integer
-      users_id:
         type: integer
       name:
         type: string

@@ -18,10 +18,16 @@ function getUsersIdRoutinesId(req, res) {
     .andWhere('id', req.swagger.params.id.value)
     .first()
     .then((result) => {
-      res.send(result);
+      if(result) {
+        res.send(result);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      next();
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found'});
     });
 
 }
