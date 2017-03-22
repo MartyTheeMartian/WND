@@ -11,6 +11,7 @@ module.exports = {
 function getExercises(req, res) {
 
   knex('exercises')
+    .where('users_id', null)
     .select('*')
     .then((result) => {
       res.send(result);

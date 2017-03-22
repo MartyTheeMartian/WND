@@ -12,6 +12,7 @@ module.exports = {
 function getExercisesId(req, res) {
 
   knex('exercises')
+    .where('users_id', null)
     .where('id', req.swagger.params.id.value)
     .select('*')
     .first()
@@ -19,7 +20,8 @@ function getExercisesId(req, res) {
       res.send(result);
     })
     .catch((err) => {
-      next();
+      res.setStatus(404);
+      res.send('Not Found');
     });
 
 }
