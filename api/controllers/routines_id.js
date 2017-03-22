@@ -12,14 +12,16 @@ module.exports = {
 function getRoutinesId(req, res) {
 
   knex('routines')
-    .where('id', req.swagger.params.id.value)
+    .where('users_id', null)
+    .andWhere('id', req.swagger.params.id.value)
     .select('*')
     .first()
     .then((result) => {
       res.send(result);
     })
     .catch((err) => {
-      next();
+      res.setStatus(404);
+      res.send('Not Found');
     });
 
 }

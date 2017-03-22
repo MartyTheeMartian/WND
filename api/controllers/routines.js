@@ -11,13 +11,14 @@ module.exports = {
 function getRoutines(req, res) {
 
   knex('routines')
+    .where('users_id', null)
     .select('*')
     .then((result) => {
       res.send(result);
     })
     .catch((err) => {
-      err.message = 'Not Found.'
-      res.send(err);
+      res.setStatus(404);
+      res.send('Not Found');
     });
 
 }

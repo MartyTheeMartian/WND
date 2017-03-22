@@ -11,14 +11,16 @@ module.exports = {
 
 function getRoutinesIdExercises(req, res) {
 
-  knex('routines-exercises')
-    .where('routines_id', req.swagger.params.id.value)
+  knex('routines_exercises')
+    .where('users_id', null)
+    .andWhere('routines_id', req.swagger.params.id.value)
     .select('exercises_id')
     .then((result) => {
       res.send(result);
     })
     .catch((err) => {
-      next();
+      res.setStatus(404);
+      res.send('Not Found');
     });
 
 }

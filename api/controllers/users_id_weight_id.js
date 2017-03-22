@@ -21,7 +21,8 @@ function getUsersIdWeightId(req, res) {
       res.send(result);
     })
     .catch((err) => {
-      next();
+      res.setStatus(404);
+      res.send('Not Found');
     });
 
 }
@@ -40,7 +41,8 @@ function patchUsersIdWeightId(req, res) {
       res.send(result);
     })
     .catch((err) => {
-      next();
+      res.setStatus(404);
+      res.send('Not Found');
     });
 }
 
@@ -61,7 +63,8 @@ function deleteUsersIdWeightId(req, res) {
       res.send(result);
     })
     .catch((err) => {
-      next();
+      res.setStatus(404);
+      res.send('Not Found');
     });
 
 }
