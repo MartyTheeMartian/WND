@@ -6,13 +6,13 @@ const bodyParser = require('body-parser');
 
 
 module.exports = {
-  getUsersIdRoutines: getUsersIdRoutines,
-  postUsersIdRoutines: postUsersIdRoutines
+  getUsersIdExercises: getUsersIdExercises,
+  postUsersIdExercises: postUsersIdExercises
 };
 
-function getUsersIdRoutines(req, res) {
+function getUsersIdExercises(req, res) {
 
-  knex('routines')
+  knex('exercises')
     .where('users_id', req.swagger.params.users_id.value)
     .select('*')
     .then((result) => {
@@ -23,12 +23,14 @@ function getUsersIdRoutines(req, res) {
     });
 }
 
-function postUsersIdRoutines(req, res) {
+function postUsersIdExercises(req, res) {
 
-  knex('routines')
+  knex('exercises')
     .insert({
       users_id: req.swagger.params.users_id.value,
-      routines_id: req.swagger.params.routines_id.value
+      name: req.body.name,
+      description: req.body.description,
+      status: req.body.status
     }, '*')
     .first()
     .then((result) => {

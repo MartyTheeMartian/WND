@@ -14,9 +14,9 @@ function getUsersIdFavorites(req, res) {
 
   knex('favorites')
     .where('users_id', req.swagger.params.users_id.value)
-    .andWhere('id', req.swagger.params.id.value)
     .select('*')
     .then((result) => {
+      console.log(result)
       res.send(result);
     })
     .catch((err) => {

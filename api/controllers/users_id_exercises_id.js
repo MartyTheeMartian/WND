@@ -4,16 +4,15 @@ var util = require('util');
 const knex = require('../../knex');
 const bodyParser = require('body-parser');
 
-
 module.exports = {
-  getUsersIdRoutinesId: getUsersIdRoutinesId,
-  patchUsersIdRoutineId: patchUsersIdRoutineId,
-  deleteUsersIdRoutineId: deleteUsersIdRoutineId
+  getUsersIdexercisesId: getUsersIdexercisesId,
+  patchUsersIdexercisesId: patchUsersIdexercisesId,
+  deleteUsersIdexercisesId: deleteUsersIdexercisesId
 };
 
-function getUsersIdRoutinesId(req, res) {
+function getUsersIdexercisesId(req, res) {
 
-  knex('routines')
+  knex('exercises')
     .where('users_id', req.swagger.params.users_id.value)
     .andWhere('id', req.swagger.params.id.value)
     .first()
@@ -27,12 +26,13 @@ function getUsersIdRoutinesId(req, res) {
 }
 
 
-function patchUsersIdRoutineId(req, res) {
+function patchUsersIdexercisesId(req, res) {
 
   knex('routines')
     .update({
-      weight: req.swagger.params.weight.value,
-      date: req.swagger.params.date.value
+      name: req.body.name,
+      description: req.body.description,
+      status: req.body.status
     }, '*')
     .where('users_id', req.swagger.params.users_id.value)
     .andWhere('id', req.swagger.params.id.value)
@@ -46,7 +46,7 @@ function patchUsersIdRoutineId(req, res) {
 
 }
 
-function deleteUsersIdRoutineId(req, res) {
+function deleteUsersIdexercisesId(req, res) {
 
   knex('routines')
     .where('users_id', req.swagger.params.users_id.value)
