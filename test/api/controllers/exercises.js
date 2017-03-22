@@ -6,21 +6,26 @@ const app = require('../../../app');
 const knex = require('../../../knex');
 
 describe('GET /exercises', () => {
+  it('responds with JSON', done => {
+    request(app)
+      .get('/exercises')
+      .expect('Content-Type', /json/)
+      .expect(200, done);
+  });
+});
+
+xdescribe('GET /exercises/:id', () => {
 
 });
 
-describe('GET /exercises/:id', () => {
+xdescribe('POST /exercises', () => {
 
 });
 
-describe('POST /exercises', () => {
+xdescribe('PUT /exercises/:id', () => {
 
 });
 
-describe('PUT /exercises/:id', () => {
-
-});
-
-describe('DELETE /exercises', () => {
+xdescribe('DELETE /exercises', () => {
 
 });
