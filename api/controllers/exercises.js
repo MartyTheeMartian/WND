@@ -17,8 +17,8 @@ function getExercises(req, res) {
       res.send(result);
     })
     .catch((err) => {
-      res.setStatus(404);
-      res.send('Not Found')
+      res.status(404);
+      res.send('Not Found');
     });
 
 }
