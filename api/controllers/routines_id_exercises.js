@@ -16,7 +16,12 @@ function getRoutinesIdExercises(req, res) {
     .andWhere('routines_id', req.swagger.params.id.value)
     .select('exercises_id')
     .then((result) => {
-      res.send(result);
+      if(result){
+        res.send(result);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
       res.status(404);
