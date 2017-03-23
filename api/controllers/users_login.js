@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt-as-promised');
+const express = require('express');
+const router = express.Router();
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }

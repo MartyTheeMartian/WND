@@ -152,7 +152,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
             
-  /users/:
+  /users/login:
     x-swagger-router-controller: users_login
     post:
       description: POST request for user to log-in
