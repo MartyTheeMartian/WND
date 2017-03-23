@@ -68,11 +68,9 @@ paths:
             $ref: "#/definitions/ErrorResponse"
 
   /routines/:
-    # binds a127 app logic to a route
     x-swagger-router-controller: routines
     get:
       description: GET request returns array of all predefined routines
-      # used as the method name of the controller
       operationId: getRoutines
       responses:
         "200":
@@ -87,11 +85,9 @@ paths:
             $ref: "#/definitions/ErrorResponse"
 
   /routines/{id}:
-    # binds a127 app logic to a route
     x-swagger-router-controller: routines_id
     get:
       description: GET request returns specific predefined routine
-      # used as the method name of the controller
       operationId: getRoutinesId
       parameters:
         - name: id
@@ -104,20 +100,16 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/RoutinesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
             
   /routines/{id}/exercises:
-    # binds a127 app logic to a route
     x-swagger-router-controller: routines_id_exercises
     get:
       description: GET request returns array of exercises for specific routine
-      # used as the method name of the controller
       operationId: getRoutinesIdExercises
       parameters:
         - name: id
@@ -129,22 +121,18 @@ paths:
       responses:
         "200":
           description: Success
-          schema:
-            # a pointer to a definition
-            $ref: "#/definitions/RoutinesResponse"
-        # responses may fall through to errors
+          # schema:
+            # $ref: "#/definitions/RoutinesResponse"
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
             
   /users/signup:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_signup
 
     post:
       description: POST request for user sign-up
-      # used as the method name of the controller
       operationId: usersSignup
       parameters:
         - name: user
@@ -158,20 +146,16 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/UsersResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
             
   /users/:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_login
     post:
       description: POST request for user to log-in
-      # used as the method name of the controller
       operationId: usersLogin
       parameters:
         - name: user
@@ -192,12 +176,10 @@ paths:
             $ref: "#/definitions/ErrorResponse"
             
   /users/{users_id}/exercises:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_id_exercises
     
     get:
       description: GET request for user's custom exercises
-      # used as the method name of the controller
       operationId: getUsersIdExercises
       parameters:
         - name: users_id
@@ -212,9 +194,7 @@ paths:
           schema:
             type: array
             items:
-            # a pointer to a definition
              $ref: "#/definitions/ExercisesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -222,7 +202,6 @@ paths:
     
     post:
       description: POST request for user to create custom exercise
-      # used as the method name of the controller
       operationId: postUsersIdExercises
       parameters:
         - name: users_id
@@ -239,21 +218,17 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/ExercisesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
             
   /users/{users_id}/exercises/{id}:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_id_exercises_id
     
     get:
       description: GET request for specific user's custom routine
-      # used as the method name of the controller
       operationId: getUsersIdexercisesId
       parameters:
         - name: users_id
@@ -271,9 +246,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/ExercisesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -281,7 +254,6 @@ paths:
 
     patch:
       description: PATCH request for user to update custom routine
-      # used as the method name of the controller
       operationId: patchUsersIdexercisesId
       parameters:
         - name: users_id
@@ -302,9 +274,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/ExercisesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -312,7 +282,6 @@ paths:
 
     delete:
       description: DELETE request for user's custom routine
-      # used as the method name of the controller
       operationId: deleteUsersIdexercisesId
       parameters:
         - name: users_id
@@ -332,21 +301,17 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/ExercisesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
 
   /users/{users_id}/routines:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_id_routines
     
     get:
       description: GET request for user's custom routine
-      # used as the method name of the controller
       operationId: getUsersIdRoutines
       parameters:
         - name: users_id
@@ -361,9 +326,7 @@ paths:
           schema:
             type: array
             items:
-            # a pointer to a definition
              $ref: "#/definitions/RoutinesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -371,7 +334,6 @@ paths:
     
     post:
       description: POST request for user to create custom routine
-      # used as the method name of the controller
       operationId: postUsersIdRoutines
       parameters:
         - name: users_id
@@ -388,21 +350,17 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/RoutinesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
   
   /users/{users_id}/routines/{id}:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_id_routines_id
     
     get:
       description: GET request for specific user's custom routine
-      # used as the method name of the controller
       operationId: getUsersIdRoutinesId
       parameters:
         - name: users_id
@@ -420,9 +378,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/RoutinesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -430,7 +386,6 @@ paths:
 
     patch:
       description: PATCH request for user to update custom routine
-      # used as the method name of the controller
       operationId: patchUsersIdRoutineId
       parameters:
         - name: users_id
@@ -451,9 +406,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/RoutinesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -461,7 +414,6 @@ paths:
 
     delete:
       description: DELETE request for user's custom routine
-      # used as the method name of the controller
       operationId: deleteUsersIdRoutineId
       parameters:
         - name: users_id
@@ -481,21 +433,17 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/RoutinesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
 
   /users/{users_id}/favorites:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_id_favorites
     
     get:
       description: GET request for user's favorite routines
-      # used as the method name of the controller
       operationId: getUsersIdFavorites
       parameters:
         - name: users_id
@@ -509,9 +457,7 @@ paths:
           schema:
             type: array
             items:
-            # a pointer to a definition
               $ref: "#/definitions/FavoritesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -519,7 +465,6 @@ paths:
     
     post:
       description: POST request for user to add routine to favorites
-      # used as the method name of the controller
       operationId: postUsersIdFavorites
       parameters:
         - name: users_id
@@ -535,21 +480,17 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/FavoritesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
 
   /users/{users_id}/favorites/{id}:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_id_favorites_id
     
     get:
       description: GET request for user's specifc favorite routine
-      # used as the method name of the controller
       operationId: getUsersIdFavoritesId
       parameters:
         - name: users_id
@@ -565,9 +506,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/FavoritesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -575,7 +514,6 @@ paths:
     
     delete:
       description: DELETE request for user to remove routine from favorites
-      # used as the method name of the controller
       operationId: deleteUsersIdFavoritesId
       parameters:
         - name: users_id
@@ -591,21 +529,17 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/FavoritesResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
 
   /users/{users_id}/log:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_id_log
     
     get:
       description: GET request for array of all log entries
-      # used as the method name of the controller
       operationId: getUsersIdLog
       parameters:
         - name: users_id
@@ -617,9 +551,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/LogResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -627,7 +559,6 @@ paths:
     
     post:
       description: POST request for user to add routine to log
-      # used as the method name of the controller
       operationId: postUsersIdLog
       parameters:
         - name: users_id
@@ -655,21 +586,17 @@ paths:
           schema:
             type: array
             items:
-            # a pointer to a definition
               $ref: "#/definitions/LogResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
 
   /users/{users_id}/log/{id}:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_id_log_id
     
     get:
       description: GET request for user's specific log entry
-      # used as the method name of the controller
       operationId: getUsersIdLogId
       parameters:
         - name: users_id
@@ -685,9 +612,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/LogResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -695,7 +620,6 @@ paths:
   
     patch:
       description: PATCH request for user to update log entry
-      # used as the method name of the controller
       operationId: patchUsersIdLogId
       parameters:
         - name: users_id
@@ -721,9 +645,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/LogResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -731,7 +653,6 @@ paths:
   
     delete:
       description: DELETE request for user to remove log entry
-      # used as the method name of the controller
       operationId: deleteUsersIdLogId
       parameters:
         - name: users_id
@@ -751,21 +672,17 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/LogResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
 
   /users/{users_id}/weight:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_id_weight
     
     get:
       description: GET request for array of all weight log entries
-      # used as the method name of the controller
       operationId: getUsersIdWeight
       parameters:
         - name: users_id
@@ -779,9 +696,7 @@ paths:
           schema:
             type: array
             items:
-            # a pointer to a definition
               $ref: "#/definitions/WeightResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -789,7 +704,6 @@ paths:
     
     post:
       description: POST request for user to add weight log entry
-      # used as the method name of the controller
       operationId: postUsersIdWeight
       parameters:
         - name: users_id
@@ -811,21 +725,17 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/WeightResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
 
   /users/{users_id}/weight/{id}:
-    # binds a127 app logic to a route
     x-swagger-router-controller: users_id_weight_id
     
     get:
       description: GET request for user's specific weight log entry
-      # used as the method name of the controller
       operationId: getUsersIdWeightId
       parameters:
         - name: users_id
@@ -837,14 +747,11 @@ paths:
           required: true
           type: integer
 
-        
       responses:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/WeightResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -852,7 +759,6 @@ paths:
   
     patch:
       description: PATCH request for user to update weight log entry
-      # used as the method name of the controller
       operationId: patchUsersIdWeightId
       parameters:
         - name: users_id
@@ -878,9 +784,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/WeightResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -888,7 +792,6 @@ paths:
   
     delete:
       description: DELETE request for user to remove entry from weight log
-      # used as the method name of the controller
       operationId: deleteUsersIdWeightId
       parameters:
         - name: users_id
@@ -904,9 +807,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/WeightResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -916,7 +817,6 @@ paths:
 
   /swagger:
     x-swagger-pipe: swagger_raw
-# complex objects have schema definitions
 definitions:
 
   Signup:
@@ -1112,5 +1012,3 @@ definitions:
     properties:
       ErrorMessage:
         type: string
-        
-

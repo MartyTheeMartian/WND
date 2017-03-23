@@ -29,8 +29,7 @@ exports.seed = function(knex, Promise) {
   })
   .then((val) => {
     val.forEach(x => filtered.push({
-      users_id: 1,
-      routines_id: 1,
+      // users_id: 1,
       name: x.name,
       description: x.description,
       exercise_type: x.status,
