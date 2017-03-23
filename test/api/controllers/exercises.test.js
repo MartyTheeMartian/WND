@@ -50,27 +50,10 @@ describe('controllers', () => {
         request(app)
         .get('/exercises')
         .set('Accept', 'application/json')
-        .expect('Content-Type', 'application/json', done)
+        .expect('Content-Type', /json/, done)
       })
 
     });
   })
 
 });
-//
-//
-// xdescribe('GET /exercises/:id', () => {
-//
-// });
-//
-// xdescribe('POST /exercises', () => {
-//
-// });
-//
-// xdescribe('PUT /exercises/:id', () => {
-//
-// });
-//
-// xdescribe('DELETE /exercises', () => {
-//
-// });
