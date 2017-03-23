@@ -14,7 +14,7 @@ function getExercises(req, res) {
     .where('users_id', null)
     .select('*')
     .then((result) => {
-      res.send(result);
+      res.set('Content-Type', 'application/json').send(result);
     })
     .catch((err) => {
       res.status(404);
