@@ -14,6 +14,16 @@ exports.seed = function(knex, Promise) {
       })
     );
   }
+  // for (let i = 1; i <= 2; i++) {
+  //   promises.push(fetch(`https://wger.de/api/v2/exercise/?page=${i}`)
+  //     .then(res => {
+  //       return res.json();
+  //     })
+  //     .then(val => {
+  //       return val.results.filter(x => x.equipment.length === 0 || x.equipment.indexOf(4) !== -1 || x.equipment.indexOf(5) !== -1 || x.equipment.indexOf(6) !== -1 || x.equipment.indexOf(7) !== -1);
+  //     })
+  //   );
+  // }
 
   return Promise
   .all(promises)
