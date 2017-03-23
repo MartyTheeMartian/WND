@@ -569,17 +569,12 @@ paths:
           in: query
           required: true
           type: integer
-        - name: rating
-          in: query
+        - name: log_entry
+          in: body
           required: true
-          type: integer
-          description: Input rating from 0-5
-        - name: date_time
-          in: query
-          required: true
-          type: string
-          format: date-time
-        
+          schema:
+            $ref: '#/definitions/Log_Entry'
+          
       responses:
         "200":
           description: Success
@@ -630,16 +625,11 @@ paths:
           in: path
           required: true
           type: integer
-        - name: rating
-          in: query
+        - name: log_entry
+          in: body
           required: true
-          type: integer
-          description: Input rating from 0-5
-        - name: date_time
-          in: query
-          required: true
-          type: string
-          format: date-time
+          schema:
+            $ref: '#/definitions/Log_Entry'
         
       responses:
         "200":
@@ -663,10 +653,6 @@ paths:
           in: path
           required: true
           type: integer
-        - name: name
-          in: query
-          required: true
-          type: string
         
       responses:
         "200":
@@ -711,16 +697,11 @@ paths:
           required: true
           type: integer
         - name: weight
-          in: query
+          in: body
           required: true
-          type: integer
-          description: Input weight in lb
-        - name: date_time
-          in: query
-          required: true
-          type: string
-          format: date-time
-        
+          schema:
+            $ref: '#/definitions/Weight_Entry'
+          
       responses:
         "200":
           description: Success
@@ -770,15 +751,10 @@ paths:
           required: true
           type: integer
         - name: weight
-          in: query
-          required: false
-          type: integer
-          description: Input weight in lb
-        - name: date_time
-          in: query
-          required: false
-          type: string
-          format: date-time
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Weight_Entry'
         
       responses:
         "200":
@@ -901,8 +877,41 @@ definitions:
             type: array 
             items: 
               type: integer
-          
+              
+  Log_Entry:
+    allOf:
+      - required: 
+        - rating
+        - notes
+        - date_time
+        properties:
+          rating:
+            description: Input rating of completed routine from 0-5
+            type: integer
+            minimum: 0
+            maximum: 5
+          notes:
+            description: Input notes on completed routine
+            type: string
+          date_time:
+            description: Input date & time 
+            type: string
+            format: date-time
 
+  Weight_Entry:
+    allOf:
+      - required: 
+        - weight
+        - date
+        properties:
+          weight:
+            description: Input weight in pounds (lb)
+            type: integer
+          date:
+            description: Input date
+            type: string
+            format: date
+  
   UsersResponse:
     required:
       - id
@@ -972,8 +981,7 @@ definitions:
       - routines_id
       - rating
       - notes
-      - date
-      - time
+      - date_time
     properties:
       id:
         type: integer
@@ -985,11 +993,10 @@ definitions:
         type: integer
       notes:
         type: string
-      date:
+      date_time:
         type: string
-      time:
-        type: string
-        
+        format: date-time
+
   WeightResponse:
     required:
       - id

@@ -35,23 +35,24 @@ function getUsersIdWeightId(req, res) {
 function patchUsersIdWeightId(req, res) {
 
   knex('weight')
-    .update({
-      weight: req.swagger.params.weight.value,
-      date: req.swagger.params.date.value
-    }, '*')
     .where('users_id', req.swagger.params.users_id.value)
     .andWhere('id', req.swagger.params.id.value)
-    .first()
+    .update({
+      weight: req.body.weight,
+      date: req.body.date
+    }, '*')
     .then((result) => {
-      res.send(result);
+      res.send(result[0]);
     })
     .catch((err) => {
-      res.setStatus(404);
-      res.send('Not Found');
+      res.status(400);
+      res.send({status: 400, ErrorMessage: 'Bad Request. Invalid Inputs.'});
     });
 }
 
 function deleteUsersIdWeightId(req, res) {
+
+  let weight_entry;
 
   knex('weight')
     .where('users_id', req.swagger.params.users_id.value)
@@ -59,13 +60,19 @@ function deleteUsersIdWeightId(req, res) {
     .select('*')
     .first()
     .then((result) => {
-      knex('weight')
+      weight_entry = result;
+      return knex('weight')
+        .del()
         .where('users_id', req.swagger.params.users_id.value)
-        .andWhere('id', req.swagger.params.id.value)
-        .select('*')
-        .first()
-        .del();
-      res.send(result);
+        .andWhere('id', req.swagger.params.id.value);
+    })
+    .then(() => {
+      if(weight_entry) {
+        res.send(weight_entry);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
       res.setStatus(404);

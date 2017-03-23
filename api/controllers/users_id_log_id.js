@@ -48,7 +48,8 @@ function patchUsersIdLogId(req, res) {
       res.send(result)
     })
     .catch((err) => {
-      next();
+      res.status(400);
+      res.send({status: 400, ErrorMessage: 'Bad Request. Invalid Inputs.'});
     });
 
 }
@@ -70,7 +71,8 @@ function deleteUsersIdLogId(req, res) {
       res.send(result)
     })
     .catch((err) => {
-      next();
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found'});
     });
 
 }

@@ -15,10 +15,16 @@ function getUsersIdLog(req, res) {
     .where('users_id', req.swagger.params.users_id.value)
     .select('*')
     .then((results) => {
-      res.send(results);
+      if(results) {
+        res.send(results);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      next();
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found'});
     });
 }
 
@@ -27,16 +33,16 @@ function postUsersIdLog(req, res) {
   knex('log')
     .where('users_id', req.swagger.params.users_id.value)
     .insert({
-      routines_id: req.swagger.params.routines_id.value,
-      rating: req.swagger.params.rating.value,
-      date: req.swagger.params.date.value,
-      time: req.swagger.params.time.value
+      routines_id: req.body.routines_id,
+      rating: req.body.rating,
+      date_time: req.body.date_time,
     },'*')
     .first()
     .then((result) => {
       res.send(results);
     })
     .catch((err) => {
-      next();
+      res.status(400);
+      res.send({status: 400, ErrorMessage: 'Bad Request. Invalid Inputs.'});
     });
 }
