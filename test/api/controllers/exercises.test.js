@@ -32,11 +32,11 @@ describe('controllers', () => {
       });
     });
 
-  describe('exercises', () => {
+  describe('exercises for visitors not logged in', () => {
 
     describe('GET /exercises', () => {
 
-      it('should respond with a status code of 200', (done) => {
+      it('should respond with a status code of 200', done => {
         request(app)
         .get('/exercises')
         .set('Accept', 'application/json')
@@ -44,7 +44,7 @@ describe('controllers', () => {
         .expect(200, done)
       })
 
-      it('should respond with a content type of json', (done) => {
+      it('should respond with a content type of json', done => {
         request(app)
         .get('/exercises')
         .set('Accept', 'application/json')
@@ -54,7 +54,7 @@ describe('controllers', () => {
 
     describe('GET /exercises/:id', () => {
 
-      it('should respond with a status code of 200', (done) => {
+      it('should respond with a status code of 200', done => {
         request(app)
         .get('/exercises')
         .set('Accept', 'application/json')
@@ -62,14 +62,14 @@ describe('controllers', () => {
         .expect(200, done)
       })
 
-      it('should respond with a content type of json', (done) => {
+      it('should respond with a content type of json', done => {
         request(app)
         .get('/exercises')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/, done)
       })
 
-      it('should respond with specific exercise for associated id', done => {
+      it('should respond with specific exercise for associated valid id', done => {
         request(app)
         .get('/exercises/1')
         .set('Accept', 'application/json')
@@ -86,7 +86,7 @@ describe('controllers', () => {
         }, done)
       })
 
-      it('should respond with specific exercise for associated id', done => {
+      it('should respond with specific exercise for associated valid id', done => {
         request(app)
         .get('/exercises/100')
         .set('Accept', 'application/json')
@@ -116,7 +116,7 @@ describe('controllers', () => {
         .get('/exercises/300')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        .expect(404, {"status":404,"ErrorMessage":"Not Found"}, done)
+        .expect({'status':404,'ErrorMessage':'Not Found'}, done)
       })
 
     });
