@@ -36,5 +36,8 @@
     "knex": "knex",
     "start": "nodemon app.js",
     "test": "swagger project test"
+  },
+  "engines": {
+  "node": "7.4.0"
   }
 }
