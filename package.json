@@ -32,6 +32,8 @@
     "supertest": "^1.0.0"
   },
   "scripts": {
+    "heroku-postbuild": "knex migrate:latest",
+    "knex": "knex",
     "start": "nodemon app.js",
     "test": "swagger project test"
   }
