@@ -43,14 +43,28 @@ function getExercises_params(req, res) {
 function postExercises_params(req, res) {
 
   knex('exercises_params')
-    .insert({
-      routines_exercises_id: req.swagger.params.re_id.value,
-      sets: req.body.sets,
-      reps: req.body.reps,
-      duration: req.body.duration
-    },'*')
-    .then((result) => {
-      res.send(result[0]);
+    .where('routines_exercises_id', req.body.re_id)
+    .andWhere('users_id', req.swagger.params.users_id.value)
+    .first()
+    .then((match) => {
+      if(match) {
+        res.status(400);
+        res.send({status: 400, ErrorMessage: 'Bad Request.'});
+      }
+      else{
+        knex('exercises_params')
+          .insert({
+            users_id: req.swagger.params.users_id.value,
+            routines_exercises_id: req.body.re_id,
+            sets: req.body.sets,
+            reps: req.body.reps,
+            duration: req.body.duration
+          },'*')
+          .then((result) => {
+            console.log(result);
+            res.send(result[0]);
+          });
+      }
     })
     .catch((err) => {
       res.status(400);

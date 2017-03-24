@@ -429,6 +429,28 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+            
+  /users/{users_id}/routines_exercises:
+    x-swagger-router-controller: users_id_routinesExercises
+    get:
+      description: GET request returns specific exercise parameters
+      operationId: getUsersIdRoutinesExercises
+      parameters:
+        - name: users_id
+          in: path
+          required: true
+          type: integer
+          description: Input users Id
+          
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/RoutinesExercisesResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
   /users/{users_id}/exercises_params:
     x-swagger-router-controller: users_id_exercisesParams
@@ -440,7 +462,7 @@ paths:
           in: path
           required: true
           type: integer
-          description: Input rountines_exercises Id
+          description: Input users Id
           
       responses:
         "200":
@@ -460,7 +482,7 @@ paths:
           in: path
           required: true
           type: integer
-          description: Input rountines_exercises Id
+          description: Input users Id
         - name: exercises
           in: body
           required: true
@@ -948,9 +970,12 @@ definitions:
 
   ExercisesParams:
     allOf:
-      - required: 
-        - created_at
+      - required:
+        - re_id
         properties:
+          re_id:
+            description: Input routines_exercises Id
+            type: integer
           sets:
             description: Input number of sets
             type: integer
@@ -960,8 +985,6 @@ definitions:
           duration:
             description: Input duration in minutes
             type: integer
-          created_at:
-            type: string
             
   Favorites:
     allOf:
@@ -1008,7 +1031,23 @@ definitions:
         type: string
       status:
         type: integer
-
+        
+  RoutinesExercisesResponse:
+    required:
+      - id
+      - routines_id
+      - exercises_id
+      - users_id
+    properties:
+      id: 
+        type: integer
+      routines_id:
+        type: integer
+      exercises_id:
+        type: integer
+      users_id:
+        type: integer
+        
   ExercisesParamsResponse:
     required:
       - id
