@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.integer('routines_id').references('id').inTable('routines').onDelete('CASCADE').notNullable();
     table.integer('exercises_id').references('id').inTable('exercises').onDelete('CASCADE').notNullable();
-    table.integer('users_id').references('id').inTable('users').onDelete('CASCADE');
+    table.integer('users_id').references('id').inTable('users').onDelete('CASCADE').defaultTo(null);
     table.timestamp("created_at").defaultTo(knex.raw('now()')).notNullable();
     table.timestamp("updated_at").defaultTo(knex.raw('now()')).notNullable();
   });

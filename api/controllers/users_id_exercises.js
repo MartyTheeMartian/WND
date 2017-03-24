@@ -31,8 +31,6 @@ function getUsersIdExercises(req, res) {
 
 function postUsersIdExercises(req, res) {
 
-  console.log(req.body);
-
   knex('exercises')
     .insert({
       users_id: req.swagger.params.users_id.value,

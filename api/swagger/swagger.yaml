@@ -65,7 +65,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-
+            
   /routines/:
     x-swagger-router-controller: routines
     get:
@@ -267,7 +267,7 @@ paths:
           in: body
           required: true
           schema: 
-            $ref: '#/definitions/CustomRoutine'
+            $ref: '#/definitions/CustomExercise'
         
       responses:
         "200":
@@ -291,10 +291,6 @@ paths:
           in: path
           required: true
           type: integer
-        - name: name
-          in: query
-          required: true
-          type: string
         
       responses:
         "200":
@@ -423,16 +419,59 @@ paths:
           in: path
           required: true
           type: integer
-        - name: name
-          in: query
-          required: true
-          type: string
         
       responses:
         "200":
           description: Success
           schema:
             $ref: "#/definitions/RoutinesResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /users/{users_id}/exercises_params:
+    x-swagger-router-controller: users_id_exercisesParams
+    get:
+      description: GET request returns specific exercise parameters
+      operationId: getExercises_params
+      parameters:
+        - name: users_id
+          in: path
+          required: true
+          type: integer
+          description: Input rountines_exercises Id
+          
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ExercisesParamsResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+    post:
+      description: POST request for specific exercise parameters
+      operationId: postExercises_params
+      parameters:
+        - name: users_id
+          in: path
+          required: true
+          type: integer
+          description: Input rountines_exercises Id
+        - name: exercises
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExercisesParams'
+            
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ExercisesParamsResponse"
         default:
           description: Error
           schema:
@@ -787,7 +826,6 @@ paths:
             $ref: "#/definitions/ErrorResponse"
 
 
-
   /swagger:
     x-swagger-pipe: swagger_raw
 definitions:
@@ -849,7 +887,21 @@ definitions:
             type: integer
             minimum: 1
             maximum: 3
-            
+
+  Weight_Entry:
+    allOf:
+      - required: 
+        - weight
+        - date
+        properties:
+          weight:
+            description: Input weight in pounds (lb)
+            type: integer
+          date:
+            description: Input date
+            type: string
+            format: date
+
   CustomRoutine:
     allOf:
       - required: 
@@ -868,6 +920,7 @@ definitions:
             type: array 
             items: 
               type: integer
+              minimum: 1
               
   Log_Entry:
     allOf:
@@ -893,19 +946,22 @@ definitions:
             type: string
             format: date
 
-  Weight_Entry:
+  ExercisesParams:
     allOf:
       - required: 
-        - weight
-        - date
+        - created_at
         properties:
-          weight:
-            description: Input weight in pounds (lb)
+          sets:
+            description: Input number of sets
             type: integer
-          date:
-            description: Input date
+          reps:
+            description: Input number of reps
+            type: integer
+          duration:
+            description: Input duration in minutes
+            type: integer
+          created_at:
             type: string
-            format: date
             
   Favorites:
     allOf:
@@ -951,6 +1007,16 @@ definitions:
       description:
         type: string
       status:
+        type: integer
+
+  ExercisesParamsResponse:
+    required:
+      - id
+      - routines_exercises_id
+    properties:
+      id: 
+        type: integer
+      routines_exercises_id:
         type: integer
 
   RoutinesResponse:

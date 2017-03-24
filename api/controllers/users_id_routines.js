@@ -25,11 +25,14 @@ function getUsersIdRoutines(req, res) {
     })
     .catch((err) => {
       res.status(404);
-      res.send('Not Found');
+      res.send({status: 404, ErrorMessage: 'Not Found'});
     });
 }
 
 function postUsersIdRoutines(req, res) {
+  let result;
+  let insertArray = [];
+  let array = req.body.exercises;
 
   knex('routines')
     .insert({
@@ -37,22 +40,27 @@ function postUsersIdRoutines(req, res) {
       name: req.body.name,
       description: req.body.description,
     }, '*')
-    .first()
-    .then((result) => {
-      let array = req.body.exercises;
+    .then((results) => {
+      result = results[0];
       for (let i = 0; i < array.length; i++) {
-        knex('routines_exercises')
-          .insert({
-            routines_id: result.id,
-            exercises_id: array[i],
-            users_id: req.swagger.params.users_id.value
-          });
+        let temp = {
+          routines_id: results[0].id,
+          exercises_id: array[i],
+          users_id: req.swagger.params.users_id.value
+        };
+        insertArray.push(temp);
       }
+    })
+    .then(() => {
+      return knex('routines_exercises')
+        .insert(insertArray, '*');
+    })
+    .then(() => {
       res.send(result);
     })
     .catch((err) => {
-      res.status(404);
-      res.send('Not Found');
+      res.status(400);
+      res.send({status: 400, ErrorMessage: 'Bad Request. Invalid Inputs.'});
     });
 
 }
