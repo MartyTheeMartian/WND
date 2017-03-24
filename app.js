@@ -2,7 +2,7 @@
 
 var SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
-const bodyParser = require('body-parser');
+
 module.exports = app; // for testing
 
 var config = {

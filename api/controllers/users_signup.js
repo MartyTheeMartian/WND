@@ -44,8 +44,6 @@ function usersSignup(req, res) {
 
             const user = users[0];
 
-            console.log(user);
-
             const claim = { userId: user.id };
             const token = jwt.sign(claim, process.env.JWT_KEY, {
               expiresIn: '7 days'

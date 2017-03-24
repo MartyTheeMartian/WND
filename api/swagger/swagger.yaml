@@ -17,7 +17,6 @@ consumes:
 # format of the responses to the client (Accepts)
 produces:
   - application/json
-  - text/plain; charset=utf-8
 paths:
 
   /exercises:
@@ -471,10 +470,12 @@ paths:
           in: path
           required: true
           type: integer
-        - name: routine_id
-          in: query
+          description: Input user Id
+        - name: favorites
+          in: body
           required: true
-          type: integer
+          schema:
+            $ref: '#/definitions/Favorites'
         
       responses:
         "200":
@@ -551,7 +552,9 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/LogResponse"
+            type: array
+            items:
+             $ref: "#/definitions/LogResponse"
         default:
           description: Error
           schema:
@@ -565,10 +568,6 @@ paths:
           in: path
           required: true
           type: integer
-        - name: routines_id
-          in: query
-          required: true
-          type: integer
         - name: log_entry
           in: body
           required: true
@@ -579,9 +578,7 @@ paths:
         "200":
           description: Success
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/LogResponse"
+            $ref: "#/definitions/LogResponse"
         default:
           description: Error
           schema:
@@ -841,12 +838,6 @@ definitions:
         - description
         - status
         properties:
-          id:
-            description: Input exercise Id
-            type: integer
-          users_id: 
-            description: Input users Id 
-            type: integer
           name:
             description: Input name of exercise
             type: string
@@ -854,10 +845,10 @@ definitions:
             description: Input description of exercise
             type: string
           status:
-            description: Input 0-2 ~ 0 = dyanmic, 1 = static, 2 = cardio
+            description: Input 1-3 ~ 1 = dynamic, 2 = static, 3 = cardio
             type: integer
-            minimum: 0
-            maximum: 2
+            minimum: 1
+            maximum: 3
             
   CustomRoutine:
     allOf:
@@ -881,22 +872,26 @@ definitions:
   Log_Entry:
     allOf:
       - required: 
+        - routines_id
         - rating
         - notes
-        - date_time
+        - date
         properties:
-          rating:
-            description: Input rating of completed routine from 0-5
+          routines_id:
+            description: Input routine Id
             type: integer
-            minimum: 0
+          rating:
+            description: Input rating of completed routine from 1-5
+            type: integer
+            minimum: 1
             maximum: 5
           notes:
             description: Input notes on completed routine
             type: string
-          date_time:
-            description: Input date & time 
+          date:
+            description: Input date
             type: string
-            format: date-time
+            format: date
 
   Weight_Entry:
     allOf:
@@ -911,6 +906,16 @@ definitions:
             description: Input date
             type: string
             format: date
+            
+  Favorites:
+    allOf:
+      - required: 
+        - routines_id
+        properties:
+          routines_id:
+            description: Input routine Id
+            type: integer
+
   
   UsersResponse:
     required:
@@ -981,7 +986,7 @@ definitions:
       - routines_id
       - rating
       - notes
-      - date_time
+      - date
     properties:
       id:
         type: integer
@@ -993,9 +998,8 @@ definitions:
         type: integer
       notes:
         type: string
-      date_time:
+      date:
         type: string
-        format: date-time
 
   WeightResponse:
     required:
@@ -1014,8 +1018,6 @@ definitions:
         type: string
   
   ErrorResponse:
-    required:
-      - ErrorMessage
     properties:
       ErrorMessage:
         type: string

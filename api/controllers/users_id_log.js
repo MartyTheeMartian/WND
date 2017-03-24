@@ -2,6 +2,7 @@
 
 var util = require('util');
 const knex = require('../../knex');
+const bodyParser = require('body-parser');
 
 
 module.exports = {
@@ -30,16 +31,19 @@ function getUsersIdLog(req, res) {
 
 function postUsersIdLog(req, res) {
 
+  console.log('hi');
+
   knex('log')
-    .where('users_id', req.swagger.params.users_id.value)
     .insert({
+      users_id: req.swagger.params.users_id.value,
       routines_id: req.body.routines_id,
       rating: req.body.rating,
-      date_time: req.body.date_time,
+      notes: req.body.notes,
+      date: req.body.date
     },'*')
-    .first()
     .then((result) => {
-      res.send(results);
+      console.log(result[0]);
+      res.send(result[0]);
     })
     .catch((err) => {
       res.status(400);

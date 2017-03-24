@@ -14,11 +14,15 @@ function getExercises(req, res) {
     .where('users_id', null)
     .select('*')
     .then((result) => {
-      res.set('Content-Type', 'application/json').send(result);
+      if(result.length !== 0) {
+        res.send(result);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      res.status(404);
-      res.send('Not Found');
+      res.status(204);
+      res.send();
     });
-
 }

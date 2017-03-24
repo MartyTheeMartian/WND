@@ -16,14 +16,22 @@ function getUsersIdExercises(req, res) {
     .where('users_id', req.swagger.params.users_id.value)
     .select('*')
     .then((result) => {
-      res.send(result);
+      if(result.length !== 0) {
+        res.send(result);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      next();
+      res.status(204);
+      res.send();
     });
 }
 
 function postUsersIdExercises(req, res) {
+
+  console.log(req.body);
 
   knex('exercises')
     .insert({
@@ -32,12 +40,13 @@ function postUsersIdExercises(req, res) {
       description: req.body.description,
       status: req.body.status
     }, '*')
-    .first()
     .then((result) => {
-      res.send(result);
+      console.log(result);
+      res.send(result[0]);
     })
     .catch((err) => {
-      next();
+      res.status(400);
+      res.send({status: 400, ErrorMessage: 'Bad Request. Invalid Inputs.'});
     });
 
 }

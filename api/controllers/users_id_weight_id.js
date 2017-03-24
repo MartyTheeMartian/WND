@@ -75,8 +75,8 @@ function deleteUsersIdWeightId(req, res) {
       }
     })
     .catch((err) => {
-      res.setStatus(404);
-      res.send('Not Found');
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found.'});
     });
 
 }

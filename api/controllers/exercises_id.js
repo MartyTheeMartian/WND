@@ -13,7 +13,7 @@ function getExercisesId(req, res) {
 
   knex('exercises')
     .where('users_id', null)
-    .where('id', req.swagger.params.id.value)
+    .andWhere('id', req.swagger.params.id.value)
     .select('*')
     .first()
     .then((result) => {
