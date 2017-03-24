@@ -54,21 +54,6 @@ describe('controllers', () => {
 
     describe('GET /exercises/:id', () => {
 
-      it('should respond with a status code of 200', done => {
-        request(app)
-        .get('/exercises')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(200, done)
-      })
-
-      it('should respond with a content type of json', done => {
-        request(app)
-        .get('/exercises')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/, done)
-      })
-
       it('should respond with specific exercise for associated valid id', done => {
         request(app)
         .get('/exercises/1')
