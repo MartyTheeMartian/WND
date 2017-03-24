@@ -14,16 +14,6 @@ exports.seed = function(knex, Promise) {
       })
     );
   }
-  // for (let i = 1; i <= 2; i++) {
-  //   promises.push(fetch(`https://wger.de/api/v2/exercise/?page=${i}`)
-  //     .then(res => {
-  //       return res.json();
-  //     })
-  //     .then(val => {
-  //       return val.results.filter(x => x.equipment.length === 0 || x.equipment.indexOf(4) !== -1 || x.equipment.indexOf(5) !== -1 || x.equipment.indexOf(6) !== -1 || x.equipment.indexOf(7) !== -1);
-  //     })
-  //   );
-  // }
 
   return Promise
   .all(promises)
@@ -56,40 +46,9 @@ exports.seed = function(knex, Promise) {
     return Promise.all(mappedFiltered)
   })
   .catch((err) => {
-    console.log('error here');
     console.error(err);
   })
   .then(() => {
     return knex.raw("SELECT setval('exercises_id_seq', (SELECT MAX(id) FROM exercises))");
   });
 };
-    // return knex('exercises').del()
-    //   .then(function () {
-    //     return Promise.all([
-    //       knex('exercises').insert(filtered)
-    //     ])
-    //     .then(() => {
-    //       return knex.raw("SELECT setval('exercises_id_seq', (SELECT MAX(id) FROM exercises))");
-    //     });
-    //   });
-
-  // return knex('exercises').del()
-  //   .then(function () {
-  //     return Promise.all([
-  //       knex('exercises').insert({
-  //         users_id: 1,
-  //         routines_id: 1,
-  //         name: 'Marty Rules',
-  //         description: 'Hardcore Marty... I dont think you wanna know',
-  //         exercise_type: 0,
-  //         sets: 0,
-  //         repetitions: 0,
-  //         time_duration: 0,
-  //         created_at: new Date('2016-06-29 14:26:16 UTC'),
-  //         updated_at: new Date('2016-06-29 14:26:16 UTC')
-  //       })
-  //     ])
-  //     .then(() => {
-  //       return knex.raw("SELECT setval('exercises_id_seq', (SELECT MAX(id) FROM exercises))");
-  //     });
-  //   });
