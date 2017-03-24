@@ -7,6 +7,12 @@
   "author": "",
   "license": "",
   "main": "app.js",
+  "scripts": {
+    "heroku-postbuild": "knex migrate:latest",
+    "knex": "knex",
+    "start": "nodemon app.js",
+    "test": "swagger project test"
+  },
   "dependencies": {
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.17.1",
@@ -30,12 +36,6 @@
     "mocha": "^2.5.3",
     "should": "^7.1.0",
     "supertest": "^1.0.0"
-  },
-  "scripts": {
-    "heroku-postbuild": "knex migrate:latest",
-    "knex": "knex",
-    "start": "nodemon app.js",
-    "test": "swagger project test"
   },
   "engines": {
     "node": "7.4.0"
