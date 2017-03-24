@@ -24,8 +24,8 @@ function getUsersIdFavorites(req, res) {
       }
     })
     .catch((err) => {
-      res.status(204);
-      res.send();
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found'});
     });
 }
 function postUsersIdFavorites(req, res) {
