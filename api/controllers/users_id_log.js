@@ -16,7 +16,7 @@ function getUsersIdLog(req, res) {
     .where('users_id', req.swagger.params.users_id.value)
     .select('*')
     .then((results) => {
-      if(results) {
+      if(results.length > 0) {
         res.send(results);
       }
       else {
