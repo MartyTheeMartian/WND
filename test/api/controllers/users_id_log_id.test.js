@@ -71,7 +71,7 @@ describe('controllers', () => {
       });
     });
 
-    describe('POST /users/:id/log/:id', () => {
+    describe('PATCH /users/:id/log/:id', () => {
 
       it('should post a user routine to log if valid user id is provided', done => {
         request(app)
