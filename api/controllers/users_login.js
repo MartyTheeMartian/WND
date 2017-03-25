@@ -47,8 +47,8 @@ function usersLogin(req, res) {
       }
     })
     .catch((err) => {
-      res.set('Content-Type', 'text/plain');
-      res.status(400).send('Bad email or password');
+      res.status(400)
+      res.send({status: 400, ErrorMessage: 'Bad email or password'});
     });
 
 }
