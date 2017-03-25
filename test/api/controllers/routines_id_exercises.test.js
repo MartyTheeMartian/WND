@@ -40,14 +40,9 @@ describe('controllers', () => {
         .get('/routines/20000/exercises')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        .expect(200, {
-          id: 2,
-          users_id: null,
-          name: 'Arms',
-          description: 'Upper body, biceps, triceps, forearms',
-          created_at: ('2016-06-29T14:26:16.000Z'),
-          updated_at: ('2016-06-29T14:26:16.000Z')
-        }, done)
+        .expect(200, [{
+          
+        }], done)
       })
     });
   });

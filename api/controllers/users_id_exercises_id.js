@@ -15,12 +15,14 @@ function getUsersIdexercisesId(req, res) {
   knex('exercises')
     .where('users_id', req.swagger.params.users_id.value)
     .andWhere('id', req.swagger.params.id.value)
+    .select('*')
     .first()
     .then((result) => {
       if(result) {
         res.send(result);
       }
       else {
+
         throw new Error();
       }
     })
