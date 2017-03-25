@@ -65,7 +65,7 @@ describe('controllers', () => {
           name: '',
           description: 'This exercise entails anything involving soccer, including any exercises that are soccer-related.',
           exercise_type: 1,
-          status: 0,
+          status: 1,
           created_at: '2016-06-29T14:26:16.000Z',
           updated_at: '2016-06-29T14:26:16.000Z'
         }, done)
@@ -73,16 +73,16 @@ describe('controllers', () => {
 
       it('should respond with specific exercise for associated valid id', done => {
         request(app)
-        .get('/exercises/100')
+        .get('/exercises/2')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, {
-          id: 100,
+          id: 2,
           users_id: null,
-          name: 'Razboj',
-          description: '<p>Razboj</p>',
+          name: '52',
+          description: 'With a deck of cards, pick a card and do push ups relating to the number value on the card. For example if a Jack of Hearts is picked, do 10 pushups.',
+          status: 1,
           exercise_type: 1,
-          status: 0,
           created_at: '2016-06-29T14:26:16.000Z',
           updated_at: '2016-06-29T14:26:16.000Z'
         }, done)
@@ -98,7 +98,7 @@ describe('controllers', () => {
 
       it('should respond with 404 and Not Found if wrong id', done => {
         request(app)
-        .get('/exercises/300')
+        .get('/exercises/3000')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect({'status':404,'ErrorMessage':'Not Found'}, done)
