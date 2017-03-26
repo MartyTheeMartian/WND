@@ -9,28 +9,28 @@ const app = require('../../../app');
 
 describe('controllers', () => {
 
-    before((done) => {
-      knex.migrate.latest()
-      .then(() => {
-        return knex.seed.run();
-      })
-      .then(() => {
-          done();
-      })
-      .catch((err) => {
-          done(err);
-      });
-    });
-
-    after(function(done) {
-      knex.migrate.rollback()
-      .then(() => {
+  before((done) => {
+    knex.migrate.latest()
+    .then(() => {
+      return knex.seed.run();
+    })
+    .then(() => {
         done();
-      })
-      .catch((err) => {
+    })
+    .catch((err) => {
         done(err);
-      });
     });
+  });
+
+  after((done) => {
+    knex.migrate.rollback()
+    .then(() => {
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });
+  });
 
     describe('exercises for users', () => {
 
