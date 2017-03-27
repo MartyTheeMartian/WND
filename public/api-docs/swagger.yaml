@@ -2,8 +2,9 @@ swagger: "2.0"
 info:
   version: "0.0.1"
   title: We're Nerds Dude!! by The Powder Rangers
+  description: A comprehensive workout API for execises without eqiupment.
 # during dev, should point to your local machine
-host: localhost:10000
+host: https://we-r-nerds-dude.herokuapp.com/
 # basePath prefixes all resource paths
 basePath: /
 #

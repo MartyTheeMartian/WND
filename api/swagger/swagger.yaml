@@ -2,11 +2,12 @@ swagger: "2.0"
 info:
   version: "0.0.1"
   title: We're Nerds Dude!! by The Powder Rangers
+  description: A comprehensive workout API for execises without equipment.
 # during dev, should point to your local machine
-host: localhost:10000
-# basePath prefixes all resource paths 
+host: https://we-r-nerds-dude.herokuapp.com/
+# basePath prefixes all resource paths
 basePath: /
-# 
+#
 schemes:
   # tip: remove http to make production-grade
   # - http
@@ -39,7 +40,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  
+
   /exercises/{id}:
     # binds a127 app logic to a route
     x-swagger-router-controller: exercises_id
@@ -54,7 +55,7 @@ paths:
           type: integer
           format: int64
           description: Input exercise id
-          
+
       responses:
         "200":
           description: Success
@@ -66,7 +67,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-            
+
   /routines/:
     x-swagger-router-controller: routines
     get:
@@ -95,7 +96,7 @@ paths:
           required: true
           type: string
           description: Enter routine id
-          
+
       responses:
         "200":
           description: Success
@@ -105,7 +106,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-            
+
   /routines/{id}/exercises:
     x-swagger-router-controller: routines_id_exercises
     get:
@@ -117,7 +118,7 @@ paths:
           required: true
           type: string
           description: Enter routine id
-          
+
       responses:
         "200":
           description: Success
@@ -127,7 +128,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-            
+
   /user/signup:
     x-swagger-router-controller: users_signup
 
@@ -151,7 +152,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-            
+
   /user/login:
     x-swagger-router-controller: users_login
     post:
@@ -164,7 +165,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Login'
-            
+
       responses:
         "200":
           description: Success
@@ -174,10 +175,10 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-            
+
   /users/{users_id}/exercises:
     x-swagger-router-controller: users_id_exercises
-    
+
     get:
       description: GET request for user's custom exercises
       operationId: getUsersIdExercises
@@ -188,12 +189,12 @@ paths:
           type: integer
           format: int64
           description: Input users id
-          
+
         # - name: token
         #   in: header
         #   type: string
         #   required: true
-        
+
       responses:
         "200":
           description: Success
@@ -205,7 +206,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-    
+
     post:
       description: POST request for user to create custom exercise
       operationId: postUsersIdExercises
@@ -220,7 +221,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CustomExercise'
-            
+
       responses:
         "200":
           description: Success
@@ -230,10 +231,10 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-            
+
   /users/{users_id}/exercises/{id}:
     x-swagger-router-controller: users_id_exercises_id
-    
+
     get:
       description: GET request for specific user's custom routine
       operationId: getUsersIdexercisesId
@@ -250,7 +251,7 @@ paths:
           type: integer
           format: int64
           description: Input routines id
-        
+
       responses:
         "200":
           description: Success
@@ -278,9 +279,9 @@ paths:
         - name: routine
           in: body
           required: true
-          schema: 
+          schema:
             $ref: '#/definitions/CustomExercise'
-        
+
       responses:
         "200":
           description: Success
@@ -305,7 +306,7 @@ paths:
           required: true
           type: integer
           format: int64
-        
+
       responses:
         "200":
           description: Success
@@ -318,7 +319,7 @@ paths:
 
   /users/{users_id}/routines:
     x-swagger-router-controller: users_id_routines
-    
+
     get:
       description: GET request for user's custom routine
       operationId: getUsersIdRoutines
@@ -329,7 +330,7 @@ paths:
           type: integer
           format: int64
           description: Input users id
-        
+
       responses:
         "200":
           description: Success
@@ -341,7 +342,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-    
+
     post:
       description: POST request for user to create custom routine
       operationId: postUsersIdRoutines
@@ -356,7 +357,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CustomRoutine'
-            
+
       responses:
         "200":
           description: Success
@@ -366,10 +367,10 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  
+
   /users/{users_id}/routines/{id}:
     x-swagger-router-controller: users_id_routines_id
-    
+
     get:
       description: GET request for specific user's custom routine
       operationId: getUsersIdRoutinesId
@@ -386,7 +387,7 @@ paths:
           type: integer
           format: int64
           description: Input routines id
-        
+
       responses:
         "200":
           description: Success
@@ -414,9 +415,9 @@ paths:
         - name: routine
           in: body
           required: true
-          schema: 
+          schema:
             $ref: '#/definitions/CustomRoutine'
-        
+
       responses:
         "200":
           description: Success
@@ -441,7 +442,7 @@ paths:
           required: true
           type: integer
           format: int64
-        
+
       responses:
         "200":
           description: Success
@@ -451,7 +452,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-            
+
   /users/{users_id}/routines_exercises:
     x-swagger-router-controller: users_id_routinesExercises
     get:
@@ -464,7 +465,7 @@ paths:
           type: integer
           format: int64
           description: Input users Id
-          
+
       responses:
         "200":
           description: Success
@@ -487,7 +488,7 @@ paths:
           type: integer
           format: int64
           description: Input users Id
-          
+
       responses:
         "200":
           description: Success
@@ -497,7 +498,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-            
+
     post:
       description: POST request for specific exercise parameters
       operationId: postExercises_params
@@ -513,7 +514,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ExercisesParams'
-            
+
       responses:
         "200":
           description: Success
@@ -526,7 +527,7 @@ paths:
 
   /users/{users_id}/favorites:
     x-swagger-router-controller: users_id_favorites
-    
+
     get:
       description: GET request for user's favorite routines
       operationId: getUsersIdFavorites
@@ -548,7 +549,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-    
+
     post:
       description: POST request for user to add routine to favorites
       operationId: postUsersIdFavorites
@@ -564,7 +565,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Favorites'
-        
+
       responses:
         "200":
           description: Success
@@ -577,7 +578,7 @@ paths:
 
   /users/{users_id}/favorites/{id}:
     x-swagger-router-controller: users_id_favorites_id
-    
+
     get:
       description: GET request for user's specifc favorite routine
       operationId: getUsersIdFavoritesId
@@ -592,7 +593,7 @@ paths:
           required: true
           type: integer
           format: int64
-        
+
       responses:
         "200":
           description: Success
@@ -602,7 +603,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-    
+
     delete:
       description: DELETE request for user to remove routine from favorites
       operationId: deleteUsersIdFavoritesId
@@ -617,7 +618,7 @@ paths:
           required: true
           type: integer
           format: int64
-        
+
       responses:
         "200":
           description: Success
@@ -630,7 +631,7 @@ paths:
 
   /users/{users_id}/log:
     x-swagger-router-controller: users_id_log
-    
+
     get:
       description: GET request for array of all log entries
       operationId: getUsersIdLog
@@ -651,7 +652,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-    
+
     post:
       description: POST request for user to add routine to log
       operationId: postUsersIdLog
@@ -666,7 +667,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Log_Entry'
-          
+
       responses:
         "200":
           description: Success
@@ -679,7 +680,7 @@ paths:
 
   /users/{users_id}/log/{id}:
     x-swagger-router-controller: users_id_log_id
-    
+
     get:
       description: GET request for user's specific log entry
       operationId: getUsersIdLogId
@@ -694,7 +695,7 @@ paths:
           required: true
           type: integer
           format: int64
-        
+
       responses:
         "200":
           description: Success
@@ -704,7 +705,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  
+
     patch:
       description: PATCH request for user to update log entry
       operationId: patchUsersIdLogId
@@ -724,7 +725,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Log_Entry'
-        
+
       responses:
         "200":
           description: Success
@@ -734,7 +735,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  
+
     delete:
       description: DELETE request for user to remove log entry
       operationId: deleteUsersIdLogId
@@ -749,7 +750,7 @@ paths:
           required: true
           type: integer
           format: int64
-        
+
       responses:
         "200":
           description: Success
@@ -762,7 +763,7 @@ paths:
 
   /users/{users_id}/weight:
     x-swagger-router-controller: users_id_weight
-    
+
     get:
       description: GET request for array of all weight log entries
       operationId: getUsersIdWeight
@@ -771,7 +772,7 @@ paths:
           in: path
           required: true
           type: integer
-        
+
       responses:
         "200":
           description: Success
@@ -783,7 +784,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-    
+
     post:
       description: POST request for user to add weight log entry
       operationId: postUsersIdWeight
@@ -798,7 +799,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Weight_Entry'
-          
+
       responses:
         "200":
           description: Success
@@ -811,7 +812,7 @@ paths:
 
   /users/{users_id}/weight/{id}:
     x-swagger-router-controller: users_id_weight_id
-    
+
     get:
       description: GET request for user's specific weight log entry
       operationId: getUsersIdWeightId
@@ -836,7 +837,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  
+
     patch:
       description: PATCH request for user to update weight log entry
       operationId: patchUsersIdWeightId
@@ -856,7 +857,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Weight_Entry'
-        
+
       responses:
         "200":
           description: Success
@@ -866,7 +867,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  
+
     delete:
       description: DELETE request for user to remove entry from weight log
       operationId: deleteUsersIdWeightId
@@ -881,7 +882,7 @@ paths:
           required: true
           type: integer
           format: int64
-        
+
       responses:
         "200":
           description: Success
@@ -899,34 +900,34 @@ definitions:
 
   Signup:
     allOf:
-      - required: 
+      - required:
         - first_name
         - last_name
-        - weight 
+        - weight
         - email
         - password
         properties:
           first_name:
             description: Input first name
             type: string
-          last_name: 
+          last_name:
             description: Input last name
             type: string
-          weight: 
+          weight:
             description: Input user weight (lb)
             type: integer
             format: int64
           email:
             description: Input email
             type: string
-          password: 
+          password:
             description: Input password
             type: string
             format: password
-          
+
   Login:
     allOf:
-      - required: 
+      - required:
         - email
         - password
         properties:
@@ -936,10 +937,10 @@ definitions:
           password:
             description: Input password
             type: string
-            
+
   CustomExercise:
     allOf:
-      - required: 
+      - required:
         - name
         - description
         - status
@@ -959,7 +960,7 @@ definitions:
 
   Weight_Entry:
     allOf:
-      - required: 
+      - required:
         - weight
         - date
         properties:
@@ -974,7 +975,7 @@ definitions:
 
   CustomRoutine:
     allOf:
-      - required: 
+      - required:
         - name
         - description
         - exercises
@@ -987,15 +988,15 @@ definitions:
             type: string
           exercises:
             description: Input exercise Ids
-            type: array 
-            items: 
+            type: array
+            items:
               type: integer
               format: int64
               minimum: 1
-              
+
   Log_Entry:
     allOf:
-      - required: 
+      - required:
         - routines_id
         - rating
         - notes
@@ -1040,10 +1041,10 @@ definitions:
             description: Input duration in minutes
             type: integer
             format: int64
-            
+
   Favorites:
     allOf:
-      - required: 
+      - required:
         - routines_id
         properties:
           routines_id:
@@ -1051,7 +1052,7 @@ definitions:
             type: integer
             format: int64
 
-  
+
   UsersResponse:
     required:
       - id
@@ -1072,7 +1073,7 @@ definitions:
           format: int64
         email:
           type: string
-  
+
   ExercisesResponse:
     type: object
     required:
@@ -1081,7 +1082,7 @@ definitions:
       - description
       - status
     properties:
-      id: 
+      id:
         type: integer
         format: int64
       name:
@@ -1090,7 +1091,7 @@ definitions:
         type: string
       status:
         type: integer
-        
+
   RoutinesExercisesResponse:
     required:
       - id
@@ -1098,7 +1099,7 @@ definitions:
       - exercises_id
       - users_id
     properties:
-      id: 
+      id:
         type: integer
         format: int64
       routines_id:
@@ -1110,13 +1111,13 @@ definitions:
       users_id:
         type: integer
         format: int64
-        
+
   ExercisesParamsResponse:
     required:
       - id
       - routines_exercises_id
     properties:
-      id: 
+      id:
         type: integer
         format: int64
       routines_exercises_id:
@@ -1129,7 +1130,7 @@ definitions:
       - name
       - description
     properties:
-      id: 
+      id:
         type: integer
         format: int64
       name:
@@ -1146,14 +1147,14 @@ definitions:
       id:
         type: integer
         format: int64
-      users_id: 
+      users_id:
         type: integer
         format: int64
       routines_id:
         type: integer
         format: int64
-  
-  LogResponse: 
+
+  LogResponse:
     required:
       - id
       - users_id
@@ -1165,7 +1166,7 @@ definitions:
       id:
         type: integer
         format: int64
-      users_id: 
+      users_id:
         type: integer
         format: int64
       routines_id:
@@ -1189,7 +1190,7 @@ definitions:
       id:
         type: integer
         format: int64
-      users_id: 
+      users_id:
         type: integer
         format: int64
       weight:
@@ -1197,7 +1198,7 @@ definitions:
         format: int64
       date:
         type: string
-  
+
   ErrorResponse:
     properties:
       ErrorMessage:
