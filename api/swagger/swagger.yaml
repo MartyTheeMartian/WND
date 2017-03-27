@@ -4,9 +4,9 @@ info:
   title: We're Nerds Dude!! by The Powder Rangers
   description: A comprehensive workout API for execises without equipment.
 # during dev, should point to your local machine
-host: we-r-nerds-dude.herokuapp.com
+host: https://we-r-nerds-dude.herokuapp.com
 # basePath prefixes all resource paths
-basePath: /
+basePath: /api
 #
 schemes:
   # tip: remove http to make production-grade
