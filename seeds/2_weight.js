@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
       return Promise.all([
         knex('weight').insert({
           id: 1,
-          users_id: 1,
+          user_id: 1,
           weight: '175',
           date: '2016-06-29',
           created_at: new Date('2016-06-29 14:26:16 UTC'),

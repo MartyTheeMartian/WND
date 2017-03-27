@@ -1,8 +1,5 @@
-require('isomorphic-fetch');
 
 exports.seed = function(knex, Promise) {
-  const promises = [];
-  const filtered = [];
 
   for (let i = 1; i <= 21; i++) {
     promises.push(fetch(`https://wger.de/api/v2/exercise/?page=${i}`)
@@ -51,4 +48,5 @@ exports.seed = function(knex, Promise) {
   .then(() => {
     return knex.raw("SELECT setval('exercises_id_seq', (SELECT MAX(id) FROM exercises))");
   });
+
 };

@@ -6,8 +6,9 @@ exports.seed = function(knex, Promise) {
       return Promise.all([
         knex('routines').insert([{
           id: 1,
-          users_id: 1,
+          user_id: 1,
           name: 'Hardcore Core',
+          status: 1,
           description: 'Intense core workout',
           created_at: new Date('2016-06-29 14:26:16 UTC'),
           updated_at: new Date('2016-06-29 14:26:16 UTC')
