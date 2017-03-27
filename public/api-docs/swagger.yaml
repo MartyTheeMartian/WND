@@ -6,7 +6,7 @@ info:
 # during dev, should point to your local machine
 host: we-r-nerds-dude.herokuapp.com
 # basePath prefixes all resource paths
-basePath:
+basePath:/
 #
 schemes:
   # tip: remove http to make production-grade
