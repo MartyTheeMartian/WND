@@ -59,6 +59,43 @@ describe('controllers', () => {
         .expect(404, {status: 404, ErrorMessage: 'Not Found'}, done)
       })
     })
-  })
 
+    describe('POST /users/:id/routines', () => {
+
+      it('should post a user routine if valid user id is provided', done => {
+        request(app)
+        .post('/users/1/routines')
+        .send({
+          users_id: 1,
+          name: 'The Pain Plan',
+          description: 'Imminent Pain!',
+          exercises: [1, 2, 3],
+          created_at: new Date('2016-06-29 14:26:16 UTC'),
+          updated_at: new Date('2016-06-29 14:26:16 UTC')
+        })
+        .expect((res) => {
+          delete res.body.created_at;
+          delete res.body.updated_at;
+        })
+        .expect('Content-Type', /json/)
+        .expect({
+          id: 3,
+          users_id: 1,
+          name: 'The Pain Plan',
+          description: 'Imminent Pain!' 
+        }, done)
+      })
+
+      it('should respond with 400 Bad Request if invalid user id is provided', done => {
+        request(app)
+        .post('/users/-1/routines')
+        .send([{
+          users_id: 1,
+          routines_id: 2,
+        }])
+        .expect('Content-Type', /json/)
+        .expect({status: 400, ErrorMessage: 'Bad Request. Invalid Inputs.'}, done)
+      })
+    })
+  })
 })
