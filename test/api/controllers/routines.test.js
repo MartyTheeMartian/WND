@@ -55,21 +55,6 @@ describe('controllers', () => {
 
     describe('GET /routines/:id', () => {
 
-      it('should respond with a status code of 200', done => {
-        request(app)
-        .get('/routines')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(200, done)
-      })
-
-      it('should respond with a content type of json', done => {
-        request(app)
-        .get('/routines')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/, done)
-      })
-
       it('should respond with a specific routine for associated valid id', done => {
         request(app)
         .get('/routines/2')
