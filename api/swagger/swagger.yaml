@@ -9,7 +9,7 @@ basePath: /
 # 
 schemes:
   # tip: remove http to make production-grade
-  - http
+  # - http
   - https
 # format of bodies a client can send (Content-Type)
 consumes:
