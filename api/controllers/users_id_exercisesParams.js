@@ -61,7 +61,6 @@ function postExercises_params(req, res) {
             duration: req.body.duration
           },'*')
           .then((result) => {
-            console.log(result);
             res.send(result[0]);
           });
       }
