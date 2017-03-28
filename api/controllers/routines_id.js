@@ -5,21 +5,28 @@ const knex = require('../../knex');
 
 
 module.exports = {
-  routinesId: routinesId
+  getRoutinesId: getRoutinesId
 };
 
 
-function routinesId(req, res) {
+function getRoutinesId(req, res) {
 
   knex('routines')
-    .where('id', req.swagger.params.id.value)
+    .where('users_id', null)
+    .andWhere('id', req.swagger.params.id.value)
     .select('*')
     .first()
     .then((result) => {
-      res.send(result);
+      if(result) {
+        res.send(result);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      next();
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found'});
     });
 
 }

@@ -2,6 +2,7 @@
 
 var util = require('util');
 const knex = require('../../knex');
+const bodyParser = require('body-parser');
 
 
 module.exports = {
@@ -17,10 +18,16 @@ function getUsersIdFavoritesId(req, res) {
     .select('*')
     .first()
     .then((result) => {
-      res.send(result);
+      if(result) {
+        res.send(result);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      next();
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found'});
     });
 }
 
@@ -28,22 +35,31 @@ function getUsersIdFavoritesId(req, res) {
 
 function deleteUsersIdFavoritesId(req, res) {
 
+  let favorite;
+
   knex('favorites')
     .where('users_id', req.swagger.params.users_id.value)
     .andWhere('id', req.swagger.params.id.value)
     .select('*')
     .first()
     .then((result) => {
-      knex('favorites')
+      favorite = result;
+      return knex('favorites')
+        .del()
         .where('users_id', req.swagger.params.users_id.value)
-        .andWhere('id', req.swagger.params.id.value)
-        .select('*')
-        .first()
-        .del();
-      res.send(result);
+        .andWhere('id', req.swagger.params.id.value);
+    })
+    .then(() => {
+      if(favorite) {
+        res.send(favorite);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      next();
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found.'});
     });
 
 }

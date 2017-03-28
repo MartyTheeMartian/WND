@@ -11,12 +11,18 @@ module.exports = {
 function getExercises(req, res) {
 
   knex('exercises')
+    .where('users_id', null)
     .select('*')
     .then((result) => {
-      res.send(result);
+      if(result.length !== 0) {
+        res.send(result);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      next();
+      res.status(204);
+      res.send();
     });
-
 }

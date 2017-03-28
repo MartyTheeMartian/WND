@@ -1,9 +1,7 @@
 require('isomorphic-fetch');
-
 exports.seed = function(knex, Promise) {
   const promises = [];
   const filtered = [];
-
   for (let i = 1; i <= 21; i++) {
     promises.push(fetch(`https://wger.de/api/v2/exercise/?page=${i}`)
       .then(res => {
@@ -14,7 +12,6 @@ exports.seed = function(knex, Promise) {
       })
     );
   }
-
   return Promise
   .all(promises)
   .then(res => {
@@ -29,14 +26,11 @@ exports.seed = function(knex, Promise) {
   })
   .then((val) => {
     val.forEach(x => filtered.push({
-      users_id: 1,
-      routines_id: 1,
+      // users_id: 1,
       name: x.name,
       description: x.description,
       exercise_type: x.status,
-      sets: 0,
-      repetitions: 0,
-      time_duration: 0,
+      status: 1,
       created_at: new Date('2016-06-29 14:26:16 UTC'),
       updated_at: new Date('2016-06-29 14:26:16 UTC')
       }));
@@ -49,40 +43,9 @@ exports.seed = function(knex, Promise) {
     return Promise.all(mappedFiltered)
   })
   .catch((err) => {
-    console.log('error here');
     console.error(err);
   })
   .then(() => {
     return knex.raw("SELECT setval('exercises_id_seq', (SELECT MAX(id) FROM exercises))");
   });
 };
-    // return knex('exercises').del()
-    //   .then(function () {
-    //     return Promise.all([
-    //       knex('exercises').insert(filtered)
-    //     ])
-    //     .then(() => {
-    //       return knex.raw("SELECT setval('exercises_id_seq', (SELECT MAX(id) FROM exercises))");
-    //     });
-    //   });
-
-  // return knex('exercises').del()
-  //   .then(function () {
-  //     return Promise.all([
-  //       knex('exercises').insert({
-  //         users_id: 1,
-  //         routines_id: 1,
-  //         name: 'Marty Rules',
-  //         description: 'Hardcore Marty... I dont think you wanna know',
-  //         exercise_type: 0,
-  //         sets: 0,
-  //         repetitions: 0,
-  //         time_duration: 0,
-  //         created_at: new Date('2016-06-29 14:26:16 UTC'),
-  //         updated_at: new Date('2016-06-29 14:26:16 UTC')
-  //       })
-  //     ])
-  //     .then(() => {
-  //       return knex.raw("SELECT setval('exercises_id_seq', (SELECT MAX(id) FROM exercises))");
-  //     });
-  //   });

@@ -2,7 +2,7 @@
 
 var util = require('util');
 const knex = require('../../knex');
-
+const bodyParser = require('body-parser');
 
 module.exports = {
   getUsersIdLogId: getUsersIdLogId,
@@ -18,10 +18,16 @@ function getUsersIdLogId(req, res) {
     .select('*')
     .first()
     .then((result) => {
-      res.send(result)
+      if(result) {
+        res.send(result);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      next();
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found'});
     });
 
 }
@@ -30,24 +36,26 @@ function patchUsersIdLogId(req, res) {
 
   knex('log')
     .update({
-      routines_id: req.swagger.params.routines_id.value,
-      rating: req.swagger.params.rating.value,
-      date: req.swagger.params.date.value,
-      time: req.swagger.params.time.value
+      routines_id: req.body.routines_id,
+      rating: req.body.rating,
+      notes: req.body.notes,
+      date: req.body.date,
     }, '*')
     .where('users_id', req.swagger.params.users_id.value)
     .andWhere('id', req.swagger.params.id.value)
-    .first()
     .then((result) => {
-      res.send(result)
+      res.send(result[0])
     })
     .catch((err) => {
-      next();
+      res.status(400);
+      res.send({status: 400, ErrorMessage: 'Bad Request. Invalid Inputs.'});
     });
 
 }
 
 function deleteUsersIdLogId(req, res) {
+
+  let log_entry;
 
   knex('log')
     .where('users_id', req.swagger.params.users_id.value)
@@ -55,16 +63,23 @@ function deleteUsersIdLogId(req, res) {
     .select('*')
     .first()
     .then((result) => {
-      knex('log')
+      log_entry = result;
+      return knex('log')
+        .del()
         .where('users_id', req.swagger.params.users_id.value)
-        .andWhere('id', req.swagger.params.id.value)
-        .select('*')
-        .first()
-        .del();
-      res.send(result)
+        .andWhere('id', req.swagger.params.id.value);
+    })
+    .then(() => {
+      if(log_entry) {
+        res.send(log_entry);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      next();
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found.'});
     });
 
 }

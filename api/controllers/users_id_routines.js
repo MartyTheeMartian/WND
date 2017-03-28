@@ -2,6 +2,7 @@
 
 var util = require('util');
 const knex = require('../../knex');
+const bodyParser = require('body-parser');
 
 
 module.exports = {
@@ -15,26 +16,51 @@ function getUsersIdRoutines(req, res) {
     .where('users_id', req.swagger.params.users_id.value)
     .select('*')
     .then((result) => {
-      res.send(result);
+      if(result.length > 0) {
+        res.send(result);
+      }
+      else {
+        throw new Error();
+      }
     })
     .catch((err) => {
-      next();
+      res.status(404);
+      res.send({status: 404, ErrorMessage: 'Not Found'});
     });
 }
 
 function postUsersIdRoutines(req, res) {
+  let result;
+  let insertArray = [];
+  let array = req.body.exercises;
 
   knex('routines')
     .insert({
       users_id: req.swagger.params.users_id.value,
-      routines_id: req.swagger.params.routines_id.value
+      name: req.body.name,
+      description: req.body.description,
     }, '*')
-    .first()
-    .then((result) => {
+    .then((results) => {
+      result = results[0];
+      for (let i = 0; i < array.length; i++) {
+        let temp = {
+          routines_id: results[0].id,
+          exercises_id: array[i],
+          users_id: req.swagger.params.users_id.value
+        };
+        insertArray.push(temp);
+      }
+    })
+    .then(() => {
+      return knex('routines_exercises')
+        .insert(insertArray, '*');
+    })
+    .then(() => {
       res.send(result);
     })
     .catch((err) => {
-      next();
+      res.status(400);
+      res.send({status: 400, ErrorMessage: 'Bad Request. Invalid Inputs.'});
     });
 
 }

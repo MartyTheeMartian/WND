@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt-as-promised');
+const express = require('express');
+const router = express.Router();
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -26,7 +28,7 @@ function usersLogin(req, res) {
     .first()
     .then((userResult) => {
       user = userResult;
-      return bcrypt.compare(req.body.password, user.password);
+      return bcrypt.compare(req.body.password, user.hashed_password);
     })
     .then((match) => {
       if(match) {
@@ -39,13 +41,14 @@ function usersLogin(req, res) {
           expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
           secure: router.get('env') === 'test'
         });
+        delete user.status;
         delete user.hashed_password;
         res.send(user);
       }
     })
     .catch((err) => {
-      res.set('Content-Type', 'text/plain');
-      res.status(400).send('Bad email or password');
+      res.status(400)
+      res.send({status: 400, ErrorMessage: 'Bad email or password'});
     });
 
 }
