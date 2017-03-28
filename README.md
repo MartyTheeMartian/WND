@@ -58,7 +58,7 @@ A comprehensive workout api to provide exercises and routine history to users wi
 * This is to inform us and you of how someone may use your api to fill a need. This will also drive your user stories for the backend api.
 * Include pictures of wireframes that you've drawn or you've made using a program, in this repo.
 
-![]https://s4.postimg.org/gabav9b25/Q2_Front_End_Wireframe.jpg
+![](https://s4.postimg.org/gabav9b25/Q2_Front_End_Wireframe.jpg)
 
 User encounters homepage. May click on Log-In or Sign-Up.
 Signed in users are redirected to members page.
@@ -68,7 +68,7 @@ Members page provides profile info, which includes weight, log of previous worko
 
 * Include pictures of the diagrams that you've drawn or you've made using a program, in this repo.
 
-![]https://s23.postimg.org/5f8o7jnsb/We_re_Nerds_Dude_ERD_-_Page_1.jpg
+![](https://s23.postimg.org/5f8o7jnsb/We_re_Nerds_Dude_ERD_-_Page_1.jpg)
 
 Wireframes:
 https://s4.postimg.org/gabav9b25/Q2_Front_End_Wireframe.jpg
