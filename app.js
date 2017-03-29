@@ -2,12 +2,12 @@
 
 var SwaggerExpress = require('swagger-express-mw');
 const express = require('express');
-var app = require('express')();
+const app = express();
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const cors = require('cors');
-const knex = require('knex.js');
+const knex = require('./knex.js');
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -24,39 +24,35 @@ let admin = false;
 
 // Checks for token authorization
 function tokenAuth(res, req, next) {
-  jwt.verify(req.token, process.env.JWT_KEY, (err, payload) => {
+  console.log(req.headers['token']);
+  jwt.verify(req.headers['token'], process.env.JWT_KEY, (err, payload) => {
     if (err) {
       auth = false;
       res.status(401);
       res.send({status: 401, ErrorMessage: 'Unauthorized'});
     }
     else {
-      if(req.params.id === payload.users_id) {
-        auth = true;
-        next();
-      }
-      else {
-        auth = false;
-        res.status(401);
-        res.send({status: 401, ErrorMessage: 'Unauthorized'});
-      }
+      auth = true;
+      next();
     }
   });
 }
 
 // Checks if user has admin authorization
 function adminCheck(res, req, next) {
+  console.log('check');
   knex('users')
     .where('users_id', req.swagger.params.users_id.value)
     .andWhere('status', 1)
     .first()
     .then((match) => {
       if(match) {
+        admin = true;
         next();
       }
     })
     .catch((err) => {
-      admin = true;
+      admin = false;
       res.status(401);
       res.send({status: 401, ErrorMessage: 'Unauthorized'});
     });
@@ -65,19 +61,22 @@ function adminCheck(res, req, next) {
 app.use(express.static(path.join('public')));
 app.use(cors());
 
+
+app.use('api/users/', tokenAuth);
+
+// If not admin, then must verify path with id
+if(admin === false) {
+  app.use('api/users/:id', tokenAuth);
+}
+
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }
 
+
   // install middleware2
 
-  app.use('/users', adminCheck);
-
-  // If not admin, then must verify path with id
-  if(admin === false) {
-    app.use('/users/:id', tokenAuth);
-  }
-
   if(auth) {
+    console.log('thing');
     swaggerExpress.register(app);
   }
 
