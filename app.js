@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const cors = require('cors');
+const knex = require('knex.js');
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -17,28 +18,50 @@ var config = {
   appRoot: __dirname // required config
 };
 
-let condition = true;
 
-// function tokenAuth(req, res, next) {
-//   console.log(req.cookies);
-//   if (req.cookies) {
-//     jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, payload) => {
-//       if (err) {
-//         res.status(401);
-//         res.send({status: 401, ErrorMessage: 'Unauthorized'});
-//       }
-//       else {
-//         next();
-//       }
-//     });
-//   }
-//   else {
-//     condition = false;
-//     // res.status(401);
-//     // res.send({status: 401, ErrorMessage: 'Unauthorized'});
-//     next();
-//   }
-// }
+let auth = true;
+let admin = false;
+
+// Checks for token authorization
+function tokenAuth(res, req, next) {
+  jwt.verify(req.token, process.env.JWT_KEY, (err, payload) => {
+    if (err) {
+      auth = false;
+      res.status(401);
+      res.send({status: 401, ErrorMessage: 'Unauthorized'});
+    }
+    else {
+      tokenId = payload.users_id;
+      if(req.params.id === payload.users_id) {
+        auth = true;
+        next();
+      }
+      else {
+        auth = false;
+        res.status(401);
+        res.send({status: 401, ErrorMessage: 'Unauthorized'});
+      }
+    }
+  });
+}
+
+// Checks if user has admin authorization
+function adminCheck(res, req, next) {
+  knex('users')
+    .where('users_id', req.swagger.params.users_id.value)
+    .andWhere('status', 1)
+    .first()
+    .then((match) => {
+      if(match) {
+        next();
+      }
+    })
+    .catch((err) => {
+      admin = true;
+      res.status(401);
+      res.send({status: 401, ErrorMessage: 'Unauthorized'});
+    });
+}
 
 app.use(express.static(path.join('public')));
 app.use(cors());
@@ -48,12 +71,16 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
 
   // install middleware2
 
-  // app.use('/users', tokenAuth);
+  app.use('/users', adminCheck);
 
-  if(condition) {
-    swaggerExpress.register(app);
+  // If not admin, then must verify path with id
+  if(admin === false) {
+    app.use('/users/:id', tokenAuth);
   }
 
+  if(auth) {
+    swaggerExpress.register(app);
+  }
 
   var port = process.env.PORT || 10000;
   app.listen(port);
