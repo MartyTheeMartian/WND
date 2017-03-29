@@ -31,7 +31,6 @@ function tokenAuth(res, req, next) {
       res.send({status: 401, ErrorMessage: 'Unauthorized'});
     }
     else {
-      tokenId = payload.users_id;
       if(req.params.id === payload.users_id) {
         auth = true;
         next();
