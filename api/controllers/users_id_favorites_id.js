@@ -35,15 +35,13 @@ function getUsersIdFavoritesId(req, res) {
 
 function deleteUsersIdFavoritesId(req, res) {
 
-  let favorite;
-
   knex('favorites')
     .where('users_id', req.swagger.params.users_id.value)
     .andWhere('id', req.swagger.params.id.value)
     .select('*')
     .first()
     .then((result) => {
-      favorite = result;
+      let favorite = result;
       return knex('favorites')
         .del()
         .where('users_id', req.swagger.params.users_id.value)
