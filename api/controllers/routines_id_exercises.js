@@ -11,8 +11,6 @@ module.exports = {
 
 function getRoutinesIdExercises(req, res) {
 
-  console.log('Hi');
-
   knex('routines_exercises')
     .where('users_id', null)
     .andWhere('routines_id', req.swagger.params.id.value)

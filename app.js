@@ -28,7 +28,6 @@ app.use(cors());
 
 // Authorization middleware
 app.use('api/users/:id', (req, res, next) => {
-  console.log(req.headers.token);
   jwt.verify(req.headers.token, process.env.JWT_KEY, (err, payload) => {
     if (err) {
       auth = false;

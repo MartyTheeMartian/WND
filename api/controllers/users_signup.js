@@ -29,7 +29,6 @@ function usersSignup(req, res) {
     .then((userCheck) => {
       // Validates email input
       let valid = Joi.validate(req.body.email, Joi.string().email());
-      console.log(valid);
       if(userCheck) {
         res.status(400);
         res.send({status: 400, ErrorMessage: 'Email already exists'});

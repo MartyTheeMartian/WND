@@ -37,7 +37,6 @@ function postUsersIdWeight(req, res) {
       date: req.body.date
     },'*')
     .then((result) => {
-      console.log(result)
       res.send(result[0]);
     })
     .catch((err) => {
