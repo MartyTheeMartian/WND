@@ -116,14 +116,15 @@ paths:
         - name: id
           in: path
           required: true
-          type: string
+          type: integer
+          format: int64
           description: Enter routine id
 
       responses:
         "200":
           description: Success
-          # schema:
-            # $ref: "#/definitions/RoutinesResponse"
+          schema:
+            $ref: "#/definitions/ExercisesResponse"
         default:
           description: Error
           schema:
@@ -183,17 +184,17 @@ paths:
       description: GET request for user's custom exercises
       operationId: getUsersIdExercises
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
           type: integer
           format: int64
           description: Input users id
-
-        # - name: token
-        #   in: header
-        #   type: string
-        #   required: true
 
       responses:
         "200":
@@ -211,6 +212,11 @@ paths:
       description: POST request for user to create custom exercise
       operationId: postUsersIdExercises
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -239,6 +245,11 @@ paths:
       description: GET request for specific user's custom routine
       operationId: getUsersIdexercisesId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -266,6 +277,11 @@ paths:
       description: PATCH request for user to update custom routine
       operationId: patchUsersIdexercisesId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -296,6 +312,11 @@ paths:
       description: DELETE request for user's custom routine
       operationId: deleteUsersIdexercisesId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -324,6 +345,11 @@ paths:
       description: GET request for user's custom routine
       operationId: getUsersIdRoutines
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -347,6 +373,11 @@ paths:
       description: POST request for user to create custom routine
       operationId: postUsersIdRoutines
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -375,6 +406,11 @@ paths:
       description: GET request for specific user's custom routine
       operationId: getUsersIdRoutinesId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -402,6 +438,11 @@ paths:
       description: PATCH request for user to update custom routine
       operationId: patchUsersIdRoutineId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -432,6 +473,11 @@ paths:
       description: DELETE request for user's custom routine
       operationId: deleteUsersIdRoutineId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -459,6 +505,11 @@ paths:
       description: GET request returns specific exercise parameters
       operationId: getUsersIdRoutinesExercises
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -482,6 +533,11 @@ paths:
       description: GET request returns specific exercise parameters
       operationId: getExercises_params
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -503,6 +559,11 @@ paths:
       description: POST request for specific exercise parameters
       operationId: postExercises_params
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -532,6 +593,11 @@ paths:
       description: GET request for user's favorite routines
       operationId: getUsersIdFavorites
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -554,6 +620,11 @@ paths:
       description: POST request for user to add routine to favorites
       operationId: postUsersIdFavorites
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -583,6 +654,11 @@ paths:
       description: GET request for user's specifc favorite routine
       operationId: getUsersIdFavoritesId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -608,6 +684,11 @@ paths:
       description: DELETE request for user to remove routine from favorites
       operationId: deleteUsersIdFavoritesId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -636,6 +717,11 @@ paths:
       description: GET request for array of all log entries
       operationId: getUsersIdLog
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -657,6 +743,11 @@ paths:
       description: POST request for user to add routine to log
       operationId: postUsersIdLog
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -685,6 +776,11 @@ paths:
       description: GET request for user's specific log entry
       operationId: getUsersIdLogId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -710,6 +806,11 @@ paths:
       description: PATCH request for user to update log entry
       operationId: patchUsersIdLogId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -740,6 +841,11 @@ paths:
       description: DELETE request for user to remove log entry
       operationId: deleteUsersIdLogId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -768,6 +874,11 @@ paths:
       description: GET request for array of all weight log entries
       operationId: getUsersIdWeight
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -789,6 +900,11 @@ paths:
       description: POST request for user to add weight log entry
       operationId: postUsersIdWeight
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -817,6 +933,11 @@ paths:
       description: GET request for user's specific weight log entry
       operationId: getUsersIdWeightId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -842,6 +963,11 @@ paths:
       description: PATCH request for user to update weight log entry
       operationId: patchUsersIdWeightId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -872,6 +998,11 @@ paths:
       description: DELETE request for user to remove entry from weight log
       operationId: deleteUsersIdWeightId
       parameters:
+        - name: token
+          in: header
+          description: Users authentication token
+          required: true
+          type: string
         - name: users_id
           in: path
           required: true
@@ -924,6 +1055,7 @@ definitions:
             description: Input password
             type: string
             format: password
+            minimum: 6
 
   Login:
     allOf:
