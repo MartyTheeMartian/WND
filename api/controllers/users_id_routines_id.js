@@ -35,20 +35,6 @@ function getUsersIdRoutinesId(req, res) {
 
 function patchUsersIdRoutineId(req, res) {
 
-  // knex('routines')
-  //   .update({
-  //     weight: req.swagger.params.weight.value,
-  //     date: req.swagger.params.date.value
-  //   }, '*')
-  //   .where('users_id', req.swagger.params.users_id.value)
-  //   .andWhere('id', req.swagger.params.id.value)
-  //   .then((result) => {
-  //     res.send(result[0]);
-  //   })
-  //   .catch((err) => {
-  //     res.status(400);
-  //     res.send({status: 400, ErrorMessage: 'Bad Request. Invalid Inputs.'});
-  //   });
   let result;
   let insertArray = [];
   let array = req.body.exercises;

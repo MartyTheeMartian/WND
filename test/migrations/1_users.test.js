@@ -8,11 +8,8 @@ const assert = require('chai').assert;
 const suite = require('mocha').Suite;
 const test = require('mocha').Test;
 const knex = require('../../knex');
-// const path = require("path")
-// const knex = require( path.resolve(__dirname) + '/../../knex.js');
 
 new suite('users migrations', () => {
-  console.log("inside?");
   before((done) => {
     knex.migrate.latest()
       .then(() => {
