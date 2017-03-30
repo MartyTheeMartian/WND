@@ -43,3 +43,5 @@ describe('controllers', () => {
           .expect('Content-Type', /json/)
           .expect(200, done)
         })
+      });
+    });

@@ -51,11 +51,11 @@ describe('controllers', () => {
         }], done)
       })
 
-      it('should respond with 404 Not Found for invalid user id', done => {
+      it('should respond with 204 for invalid user id', done => {
         request(app)
         .get('/users/-1/routines_exercises')
-        // .set('Accept', 'application/json')
-        // .expect('Content-Type', /json/)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
         .expect(204, {}, done)
       })
     })

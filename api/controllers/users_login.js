@@ -43,6 +43,7 @@ function usersLogin(req, res) {
         });
         delete user.status;
         delete user.hashed_password;
+        user.token = token;
         res.send(user);
       }
     })
