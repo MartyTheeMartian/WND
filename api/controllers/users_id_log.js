@@ -31,8 +31,6 @@ function getUsersIdLog(req, res) {
 
 function postUsersIdLog(req, res) {
 
-  console.log('hi');
-
   knex('log')
     .insert({
       users_id: req.swagger.params.users_id.value,
@@ -42,7 +40,6 @@ function postUsersIdLog(req, res) {
       date: req.body.date
     },'*')
     .then((result) => {
-      console.log(result[0]);
       res.send(result[0]);
     })
     .catch((err) => {

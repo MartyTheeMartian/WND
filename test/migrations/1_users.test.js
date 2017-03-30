@@ -80,7 +80,6 @@ new suite('users migrations', () => {
             defaultValue: 'now()'
           }
         };
-        console.log(expected, "expected");
         for (const column in expected) {
           assert.deepEqual(
             actual[column],

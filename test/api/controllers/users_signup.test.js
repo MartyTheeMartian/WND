@@ -53,7 +53,6 @@ describe('controllers', () => {
         hashed_password: password
       })
       .expect(res => {
-        console.log(res);
         delete res.body.createdAt;
         delete res.body.updatedAt;
       })

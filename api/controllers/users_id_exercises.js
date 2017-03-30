@@ -39,7 +39,6 @@ function postUsersIdExercises(req, res) {
       status: req.body.status
     }, '*')
     .then((result) => {
-      console.log(result);
       res.send(result[0]);
     })
     .catch((err) => {
