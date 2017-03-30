@@ -22,63 +22,51 @@ var config = {
 let auth = true;
 let admin = false;
 
-// Checks for token authorization
-function tokenAuth(res, req, next) {
-  console.log(req.headers['token']);
-  jwt.verify(req.headers['token'], process.env.JWT_KEY, (err, payload) => {
+
+app.use(express.static(path.join('public')));
+app.use(cors());
+
+// Authorization middleware
+app.use('api/users/:id', (req, res, next) => {
+  console.log(req.headers.token);
+  jwt.verify(req.headers.token, process.env.JWT_KEY, (err, payload) => {
     if (err) {
       auth = false;
       res.status(401);
       res.send({status: 401, ErrorMessage: 'Unauthorized'});
     }
     else {
-      auth = true;
-      next();
+      knex('users')
+        .where('id', payload.userId)
+        .andWhere('status', 1)  // Checks for admin rights
+        .first()
+        .then((admin) => {
+          if(admin) {
+            next();
+          }
+          else if (req.params.id == payload.userId) {
+            next();
+          }
+          else {
+            res.status(401);
+            res.send({status: 401, ErrorMessage: 'Unauthorized'});
+          }
+        })
+        .catch((err) => {
+          res.status(401);
+          res.send({status: 401, ErrorMessage: 'Unauthorized'});
+        });
     }
   });
-}
+});
 
-// Checks if user has admin authorization
-function adminCheck(res, req, next) {
-  console.log('check');
-  knex('users')
-    .where('users_id', req.swagger.params.users_id.value)
-    .andWhere('status', 1)
-    .first()
-    .then((match) => {
-      if(match) {
-        admin = true;
-        next();
-      }
-    })
-    .catch((err) => {
-      admin = false;
-      res.status(401);
-      res.send({status: 401, ErrorMessage: 'Unauthorized'});
-    });
-}
-
-app.use(express.static(path.join('public')));
-app.use(cors());
-
-
-app.use('api/users/', tokenAuth);
-
-// If not admin, then must verify path with id
-if(admin === false) {
-  app.use('api/users/:id', tokenAuth);
-}
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }
 
-
   // install middleware2
+  swaggerExpress.register(app);
 
-  if(auth) {
-    console.log('thing');
-    swaggerExpress.register(app);
-  }
 
   var port = process.env.PORT || 10000;
   app.listen(port);

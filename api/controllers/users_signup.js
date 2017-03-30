@@ -8,13 +8,16 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt-as-promised');
 const express = require('express');
 const router = express.Router();
+const Joi = require('joi');
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+
 module.exports = {
   usersSignup: usersSignup
 };
+
 
 function usersSignup(req, res) {
 
@@ -24,9 +27,16 @@ function usersSignup(req, res) {
     .where('email', req.body.email)
     .first()
     .then((userCheck) => {
+      // Validates email input
+      let valid = Joi.validate(req.body.email, Joi.string().email());
+      console.log(valid);
       if(userCheck) {
         res.status(400);
         res.send({status: 400, ErrorMessage: 'Email already exists'});
+      }
+      else if (valid.error !== null) {
+        res.status(400);
+        res.send({status: 400, ErrorMessage: 'Improper email format'});
       }
       else {
         bcrypt.hash(password, 12)

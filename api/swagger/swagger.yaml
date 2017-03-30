@@ -4,7 +4,7 @@ info:
   title: We're Nerds Dude!! by The Powder Rangers
   description: A comprehensive workout API for execises without equipment.
 # during dev, should point to your local machine
-host: localhost:10000
+host: we-r-nerds-dude.herokuapp.com
 # basePath prefixes all resource paths
 basePath: /api
 #
@@ -1055,6 +1055,7 @@ definitions:
             description: Input password
             type: string
             format: password
+            minimum: 6
 
   Login:
     allOf:
